@@ -1,0 +1,84 @@
+HTML: 
+<button class="clicky" onclick="changeColumn1()">Click Button 1</button>
+<button class="clicky" onclick="changeColumn2()">Click Button 2</button>
+
+<div class="column" id="column1">
+  <h2>Original Heading 1</h2>
+</div>
+
+<div class="column" id="column2">
+  <h2>Original Heading 2</h2>
+</div>
+
+
+JavaScript: 
+function changeColumn1() {
+    // Change the background color of column1
+    document.getElementById("column1").style.backgroundColor = "lightblue";
+    
+    // Change the heading text of column1
+    document.getElementById("column1").getElementsByTagName("h2")[0].innerText = "Heading Changed for Column 1";
+  }
+  
+  function changeColumn2() {
+    // Change the background color of column2
+    document.getElementById("column2").style.backgroundColor = "lightgreen";
+    
+    // Change the heading text of column2
+    document.getElementById("column2").getElementsByTagName("h2")[0].innerText = "Heading Changed for Column 2";
+  }
+
+  
+
+JavaScript: 
+function changeColumn1() {
+    // Override CSS for column1
+    var column1 = document.getElementById("column1");
+    column1.style.backgroundColor = "lightblue";   // Inline background color for column1
+    column1.style.padding = "40px";  // Override padding
+    
+    // Override CSS for h2 inside column1
+    var heading1 = column1.getElementsByTagName("h2")[0];
+    heading1.style.color = "darkred"; // Change text color for h2 inside column1
+    heading1.style.fontSize = "25px"; // Change font size for h2 inside column1
+  }
+  
+  function changeColumn2() {
+    // Override CSS for column2
+    var column2 = document.getElementById("column2");
+    column2.style.backgroundColor = "lightgreen"; // Inline background color for column2
+    column2.style.padding = "50px";  // Override padding
+    
+    // Override CSS for h2 inside column2
+    var heading2 = column2.getElementsByTagName("h2")[0];
+    heading2.style.color = "darkblue"; // Change text color for h2 inside column2
+    heading2.style.fontSize = "30px"; // Change font size for h2 inside column2
+  }
+
+
+
+
+  .container {
+    display: flex;
+    justify-content: flex-start;  /* Align items horizontally */
+  }
+  
+  .left {
+    display: flex;
+    flex-direction: column;  /* Arrange the first four divs vertically */
+    margin-right: 20px;  /* Add some space between the left divs and the right div */
+  }
+  
+  .box {
+    margin-bottom: 10px;  /* Space between each of the first four divs */
+    padding: 10px;
+    background-color: lightgray;
+  }
+  
+  .right {
+    padding: 10px;
+    background-color: lightblue;
+  }
+  
+  
+

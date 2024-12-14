@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITLE NAME</title>
+
+    <link rel="stylesheet" href="e3styles.css">
+    
+</head>
+
+
+<body>
+
+
+    <div class="column" id="column1">
+
+        <img class="images" id="image1" src="ex3img1.PNG">
+
+        <h1 id="heading1">Heading Text 1</h1>
+
+        <form>
+            <label>Change Heading Text: </label>
+            <input type="text" id="newText1">
+            <button type="button" class="clicky" id="changeText1" onclick="changeHeadingText1()">Submit</button>
+        </form>
+
+    </div>
+    <!-- column 1 -->
+
+
+
+
+    <div class="column" id="column2">
+
+        <img class="images" id="image1" src="ex3img2.PNG">
+
+        <h1 id="heading2">Heading Text 2</h1>
+
+        <form>
+            <label>Change Heading Text: </label>
+            <input type="text" id="newText2">
+            <button type="button" class="clicky" id="changeText2" onclick="changeHeadingText2()">Submit</button>
+        </form>
+
+    </div>
+    <!-- column 2 -->
+ 
+
+
+</body>
+
+
+
+
+<script>
+    function changeHeadingText1() {
+    // Get the value from the input field
+
+    var newText = document.getElementById("newText1").value;
+
+    // Set the text of the heading to the new value
+    document.getElementById("heading1").innerText = newText;
+    }
+
+
+    function changeHeadingText2() {
+    // get value from second input field 
+
+    var newText = document.getElementById("newText2").value; 
+
+    // text of the second heading to new value 
+    document.getElementById("heading2").innerText = newText; 
+    }
+</script>
+
+</html>
