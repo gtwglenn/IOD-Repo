@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Selection</title>
+</head>
+
+<link rel="stylesheet" href="diceStyles.css">
+
+<body>
+    
+<h2>Press 'Spin' to roll:</h2>
+
+<div class="container" id="megaDiv">
+
+<div class="leftClass" id="diceContainer">
+
+    <!-- user selects d12 to roll -->
+    <div class="diceType" id="d12Select">
+        <h4>12 Sided</h4>
+        <img id="d12Face" src="d12/d12SelectImage.PNG" alt="d12 Selection">
+        <!-- on click -> new webpage -> roll: display face as result -->
+        <button type="button" class="diceButton" id="d12button" onclick="spinD12()">S P I N</button>
+        <p id="12result"></p>
+    </div>
+
+</div>
+<!-- left side of webpage divs -->
+
+<!-- right side of webpage / static div -->
+<div class="results" id="resultsTab">
+    <h3>Results: </h3>
+    <p id="resultList"></p>
+    <!-- placeholder for results -->
+    <!-- clear after ??? results printed -->
+</div>
+
+
+</div>
+<!-- div container (all) -->
+
+<script src="diceRoll1.js">
+
+</script>
+
+
+</body>
+
+
+</html>
