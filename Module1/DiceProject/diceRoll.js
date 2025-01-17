@@ -70,7 +70,6 @@ function spinD12 () {
 
     var imageElement = document.getElementById("d12Face");
     imageElement.src = imageFileName; 
-
     imageElement.style.display = "block"; 
 
     // fix button placement 
@@ -100,7 +99,6 @@ function spinD20 () {
 
     var imageElement = document.getElementById("d20Face");
     imageElement.src = imageFileName; 
-
     imageElement.style.display = "block"; 
 
     // fix button placement 

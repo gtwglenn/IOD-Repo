@@ -47,9 +47,6 @@ function spinD6 () {
     console.log(newResult); 
     return newResult; 
 
-    // pass newD6Result --> Results Tab 
-
-
 }
 
 function spinD12 () {
@@ -81,6 +78,7 @@ function spinD12 () {
 
     // pass newD6Result --> Results Tab
 }
+
 
 function spinD20 () {
     //number generator 1-20
@@ -123,7 +121,7 @@ function spinD20 () {
 
 function d6page () {
 
-document.getElementById("d6button").addEventListener("click", function() {
+document.getElementById("d6pageButton").addEventListener("click", function() {
     // -> d6 select screen 
     window.location.href = "d6select.html"; // on-click --> d6select page
   });
@@ -132,7 +130,7 @@ document.getElementById("d6button").addEventListener("click", function() {
 
 function d12page () {
 
-    document.getElementById("d12button").addEventListener("click", function() {
+    document.getElementById("d12pageButton").addEventListener("click", function() {
         // -> d12 select screen 
         window.location.href = "d12select.html"; // on-click --> d6select page
     });
@@ -142,7 +140,7 @@ function d12page () {
 
 function d20page () {
 
-    document.getElementById("d20button").addEventListener("click", function() {
+    document.getElementById("d20pageButton").addEventListener("click", function() {
         // -> d20 select screen 
         window.location.href = "d20select.html"; // // on-click --> d6select page
     });
@@ -179,7 +177,18 @@ function appendResult (newResult) {
     // change lastResult to newD6Result for new iteration 
     lastResult = newResult; 
 
+    console.log(newItem);
+
+
+    
+
 }
+
+
+
+/*      E V E N T   L I S T E N E R S       */
+
+
 
 document.getElementById('d6button').addEventListener('click', function() {
 
