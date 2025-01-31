@@ -1,0 +1,302 @@
+
+
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body & Background */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center; /* Horizontally center the navbar */
+    align-items: flex-start;     /* Vertically center the navbar */
+    height: 100vh;           /* Ensure full viewport height */
+
+    text-overflow: clip;
+  }
+  
+
+
+
+  /* Navbar Styles using Flexbox */
+  .navbar {
+    display: flex;
+    justify-content: center; /* Center the content of the navbar */
+    align-items: center;     /* Center vertically */
+    background-color: #003366;
+    color: #fff;
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Ensure text is centered */
+  }
+  
+  .navbar .logo a {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 50px; /* Space between logo and nav items */
+  }
+  
+  .nav-menu {
+    display: flex;
+    justify-content: center; /* Center the menu items */
+    gap: 20px; /* Space between each nav item */
+    list-style-type: none;
+  }
+  
+  .nav-item {
+    position: relative;
+  }
+  
+  .nav-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: block;
+  }
+  
+  .nav-item:hover > a {
+    background-color: #00509d;
+  }
+  
+  /* Dropdown Styles */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #003366;
+    list-style-type: none;
+    padding: 10px 0;
+    min-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-menu li a {
+    padding: 10px 20px;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  #aboutMe {
+
+    width: 20vw; 
+    height: 20vw; 
+    padding-top: 20px; 
+    text-align: left;
+    
+  }
+
+  
+  /* Sticky Navbar */
+  body {
+    padding-top: 70px; /* Avoid content being hidden under the navbar */
+  }
+  
+  @media (max-width: 768px) {
+    .nav-menu {
+      flex-direction: column; /* Stack the menu items vertically on smaller screens */
+      align-items: center;
+    }
+  
+    .nav-item {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .dropdown-menu {
+      position: static; /* Make the dropdowns align properly in the stacked layout */
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
+
+  
+  /* Articles Container using Flexbox */
+  .articles-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto a new line if necessary */
+    justify-content: space-between; /* Space between the articles */
+    gap: 20px; /* Space between each article */
+    padding: 80px 20px 20px; /* Add top padding to avoid overlap with the navbar */
+    width: 100%; /* 100%??? 
+    max-width: 1200px; /* Optional: Limit the maximum width of the articles container */
+    /* margin: 0 auto; /* Center the container horizontally */
+
+    
+  }
+
+  .right-container {
+    
+    display: block; 
+    padding: 80px 20px 20px; 
+    gap: 20px; 
+    text-decoration: none;
+
+  }
+
+  #rightArticles {
+
+    width: 60vw; 
+    font-size: large;
+
+  }
+
+
+  .homeThumbnail {
+
+    height: 25vh; 
+    width: 40%; 
+    padding-bottom: 20px; 
+
+  }
+
+
+
+  
+  /* Article Styling */
+  .article {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px); /* Three articles per row */
+    box-sizing: border-box; /* Include padding and margin in width calculation */
+    
+    
+  }
+  
+  .article h2 {
+    font-size: 20px;
+    color: #003366;
+    margin-bottom: 10px;
+  }
+  
+  .article p {
+    font-size: 16px;
+    color: #333;
+
+    overflow-wrap: break-word;
+    
+  }
+  
+  /* Responsive Design (Single Column on Small Screens) */
+  @media (max-width: 768px) {
+    .articles-container {
+      flex-direction: column; /* Stack articles vertically */
+      align-items: center;
+    }
+  
+    .article {
+      width: 100%; /* Make each article take up full width on small screens */
+      margin-bottom: 20px; /* Space between stacked articles */
+    }
+  }
+
+
+  #titleLink a{
+
+    text-decoration: none;
+    color: inherit;
+
+  }
+
+
+
+
+
+
+
+  /*  content pages --> override rules */
+
+  #contentContainer {
+
+    width: 85vw;
+    height: 85vw; 
+
+  }
+
+  #moreContentContainer {
+
+    text-align: center; 
+  }
+
+  #moreContentContainer img {
+
+    max-width: 300px;
+    max-height: 700px;
+
+  }
+
+  #moreContentContainer {
+
+    font-weight: bold; 
+    line-height: 1.5; 
+  }
+
+  #evenMoreContentContainer {
+
+    width: 75vw; 
+    height: 70vw; 
+    text-align: center;
+
+  }
+
+
+
+  
+
+
+  /* notes: 
+
+    right-side div on homepage should link to article page
+
+      -- but there is no visual indication of where to click 
+
+      -- how do make whole thing clicky go?
+          -- or just link?  
+
+
+
+    I don't like how homepage scales but time amiright 
+
+    I don't like the right edge of right-side divs expanding 
+
+      to take up negative space ALL THE WAY 
+
+        would rather have -> 100%-30px or something like that
+
+          from notes: 100vw - (#of pixels) 
+                      this is great beacause it is a percentage - set value (rather than a percentage minus a percentage) 
+                      so you could always have a buffer of a certain amount of pixels rather than setting absolute values
+
+
+        why are my a tags purple? 
+
+
+        finish all links on homepage 
+
+        correct about -> Contact info 
+
+        click logo also go home
+
+  */ 

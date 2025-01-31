@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newspaper Website Clone Assignment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header>
+
+    <!-- navigation bar -->
+    <nav class="navbar">
+
+      <!-- add menu drop down - expand (full) -->
+
+      <div class="logo">
+        <a href="./index.html">Rardy.com</a>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        
+        <!-- dropdown -->
+        <li class="nav-item dropdown">
+          <a href="#">Contact Info</a>
+          <ul id="aboutMe" class="dropdown-menu">
+            <li><a href="#">Make this expand into a big ol' contact info tab.</a></li>
+            <li><a href="#">I am just going to use &lt;a&gt; tags for styling reasons. Not because I am lazy. I honestly forgot how tedious CSS and web design can be. So the desire to be a back-end developer grows forever more.</a></li>
+            <li><a href="#">Contact Information: write stuff here to see if the text-wrap works.<br>I thought there was a different code for newline. Why doesn't the text wrap work for the articles?
+                  <br><br>
+                  <br>Email: gtw.glenn@gmail.com
+                  <br>Phone: (123)-456-7890</a></li>
+          </ul>
+        </li>
+
+                <!-- maybe add a mouseover shadow/highlight effect -->
+
+        <!-- dropdown1 -->
+        <li class="nav-item dropdown">
+          <a href="#">Dropdown</a>
+          <ul class="dropdown-menu">
+            <li><a href="content.html">Content</a></li>
+            <li><a href="more_content.html">More Content</a></li>
+            <li><a href="even_more_content.html">Even More Content</a></li>
+          </ul>
+        </li>
+
+        <!-- additional sections -->
+        <li class="nav-item"><a href="./article4.html">One</a></li>
+        <li class="nav-item"><a href="./article5.html">Two</a></li>
+        <li class="nav-item"><a href="./thirdpage.html">Three</a></li>
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+
+<!-- END NAVIGATION BAR -->
+
+
+  
+
+
+  <!-- Articles Section (Flexbox Container) -->
+  <div class="articles-container">
+     
+    <div>
+      <img id="homepagePNG" src="./src/homepagePNG.jpg">
+    </div>
+
+    <div class="article">
+      
+      <h2 id="titleLink">
+        <a href="./content.html">Interview With Local Nerd</a>
+      </h2>
+      <p>This is a summary of the first article... okay, so it sort of works. But it only works with spaces and separate words. Why do you do this to me, computer? I am just trying to make a simple website and see if the text will actually stay in this div container.</p>
+      <br>
+      <p>54rdeft6gyuhjnidfrtgyuhjinkmrdeftgyhubjnk4rde5ftgyuhjnikmftr6gyuhjdreftubjhnfdctrvgh<br>Oh, would you look at that? It works now.</p><br>
+
+      <a href="./content.html">Read more</a>
+
+    </div>
+        <!-- note: use overflow-wrap for elements that have a wrap property already set --> 
+
+    <div class="article">
+      <h2 id="titleLink">
+        <a href="./more_content.html">My Retinas Are Starting To Burn</a>
+      </h2>
+      <p>If the second article were long enough to have a summary, I would put it here. 
+        <br><br><br><br>
+        It is really long. And it is very descriptive. Or is it? Click .... aw wait, do I really want to make a 
+            'Read More' button (link) with like a fancy arrow? or something. Maybe.
+        <br><br>
+        I don't want to change my &lt;a&gt;tag CSS rules. 
+      </p>
+      <br>
+      <a href="./more_content.html">Read more</a>
+
+    </div>
+
+    <div class="article">
+      <h2 id="titleLink">
+        <a href="even_more_content.html">Are You Okay, Computer? And Other Questions You Might Ask.</a>
+      </h2>
+
+      <p>Fitter happier<br>
+        More productive<br>
+        Comfortable<br>
+        Not drinking too much<br>
+        Regular exercise at the gym (3 days a week)<br>
+        Getting on better with your associate employee contemporaries<br>
+        At ease<br>
+        Eating well (no more microwave dinners and saturated fats)<br>
+        A patient, better driver<br>
+        A safer car (baby smiling in back seat)<br>
+        Sleeping well (no bad dreams)<br>
+        No paranoia<br>
+        Careful to all animals (never washing spiders down the plughole)<br>
+        Keep in contact with old friends (enjoy a drink now and then)<br>
+        Will frequently check credit at (moral) bank (hole in the wall)
+        <br>
+        <br>
+        <a href="./even_more_content.html">Read more</a>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        does this div not stop? 
+        <br><br><br><br><br><br>
+        Maybe come back and change that. 
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="right-container">
+    
+    <div id="rightArticles" class="article">
+      <img class="homeThumbnail" src="/Module2/Lab 3 - Newspaper Lab/src/thumbnail1.PNG" alt="T H U M B N A I L"> 
+      <h2>
+        <a href="./article4.html">Article Title 4</a>
+      </h2>
+      <p>This article goes on the other side... but it's bigger.</p>
+    </div>
+
+    <br><br>
+
+    <div id="rightArticles" class="article">
+      <img class="homeThumbnail" src="/Module2/Lab 3 - Newspaper Lab/src/thumbnail2.PNG" alt="T H U M B N A I L"> 
+        <h2>
+          <a href="./article5.html">Article Title 5</a>
+        </h2>
+      <p>This one is also bigger.</p>
+    </div>
+
+
+  </div>
+
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>
