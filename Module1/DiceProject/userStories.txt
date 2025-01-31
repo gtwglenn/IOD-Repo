@@ -13,3 +13,8 @@ users will arrive at landing page (homepage) for Dice Generator
 - Results tab (Spin screen page): After each press of the 'Spin' button, 
     the webpage will subsequently record the result of the last spin of the dice in the 'Results' tab
 
+
+
+
+
+* move to Dice Project? 

@@ -1,0 +1,104 @@
+
+CSIS.org Layout Notes 
+
+Generic publishing website layout (Top --> Bottom)
+
+
+    
+
+- Main Navigation Bar/Menu (darker gradient)
+    *static -- stays at top of every page 
+
+    (Left --> Right )
+
+    - Menu 
+       - (icon) click to open --> expand to full window
+
+    - Drop Down 
+        - (title + icon) --> drop down opens up 
+
+    - Section (link to)
+
+    - Big Ass Mofo Logo 
+
+    - Drop Down 
+        - (title + icon) --> drop down opens up z
+
+    - Drop Down 
+        - (title + icon) --> drop down opens up 
+
+    - Search (icon) --> opens search page 
+
+
+- Main Feature Bar (lighter gradient)
+    *only on main/landing page 
+
+- Main Content / Main Features (white / pick a background color)
+
+    - divs/containers divide the page's content horizontally across the page 
+
+
+*Top Menus / bars disappear upon scroll down 
+
+...if I build past the main landing page... 
+
+- Giant feature appears upon scrolldown --> separate from landing page/main content 
+
+    - links to another page 
+
+    - visual divide from main page (user, you are now traveling away from 'main page' area)
+
+- repeat of Main Content area (darker gradient) 
+
+    - more articles, etc. 
+
+
+... 
+
+- Eventually have About Us / Contact Info / footer section (darker gradient)
+
+
+
+******* WEBPAGE ELEMENTS ALIGNED CENTER ********* 
+
+- more important article/feature --> more space on webpage 
+
+- dropdowns and menus expand so that the user is never taken away from the homepage unless they deliberately click 
+
+- static menu/navigation bar for easy navigation 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------- MOVING FORWARD -------------------------
+
+
+
+*Navigation bar -- do I want to use 'buttons' or have the text be links with stylized font? 
+
+buttons
+
+*Logo??? 
+	lmao 
+
+*Decided on: hoverable dropdowns because slick 
+
+
+*second/buffer header section should expand out into background of main content area (how do?)
+
+*Maybe I can use pictures of Penny <3 
+
+*wtf margins? 
+
+
+

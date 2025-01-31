@@ -40,9 +40,26 @@
 </div>
 <!-- div container (all) -->
 
+
+
+
+<!-- random button necessary to get spinD12() to work -->
+
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 <button type="button" id="d6button"></button>
+
+<!-- I think this is because I have three event listeners looking for 3 separate buttons (button ids), 
+
+    instead of just giving the button a unique name and using it for all 3 select pages
+
+        how it's set up: 3 select pages -> 3 different spin button ids -> 3 different event listeners
+
+        how a pro would do it: 3 select pages -> 1 spin button id -> 1 event listener
+        
+--> 
+
+
 
 <script src="diceRoll1.js">
 

@@ -1,0 +1,37 @@
+
+
+MODULE 3 -- LAB EXERCISE NOTES 
+
+
+
+-- JS FUNDAMENTALS  -- 
+
+
+- use backticks for template literals (see: #4) 
+	- `${a} + ${b} is `
+
+	* --> go back and finish #4 
+
+	- template literals* --> ex: when using function expressions and arrow expressions 
+
+
+- function expressions --> variable expressions tie a function to a specific variable 
+
+	- function declaration can be 'hoisted' --> you can call a function before it is defined 
+
+	- expressions can only be accessed after they are defined 
+
+	
+	-- use constructors?? ?see screenshot?
+
+
+- arrow functions -- same as function expressions but w/out the keyword  (see S35 for examples)
+	
+	- can omit braces if single statement 
+
+	- shorthand version of a function expression 
+
+
+	-- can be used to pass parameters to other functions (?)
+
+

@@ -8,7 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+
   </head>
+
+
   <body>
     <h1>My CSS journey</h1>
 
@@ -50,7 +56,7 @@
     <article>
       <h2>II. Box model and common properties</h2>
       <div class="box">I'm the first box.</div>
-      <div class="box">
+      <div class="box" id="fivePointOne">
         I'm second and I have a lot of content. In publishing and graphic
         design, Lorem ipsum is a placeholder text commonly used to demonstrate
         the visual form of a document or a typeface without relying on
@@ -113,8 +119,8 @@
       </div>
 
       <div class="calc-row">
-        <div class="fixed-width-col"><img src="assets/images/img1.png" width="300"/></div>
-        <div class="fluid-col">This text should expand to fill 'the rest' of the page width not used by the image inside the fixed-width-col.
+        <div id="fixedSelector" class="fixed-width-col"><img src="assets/images/img1.png" width="300"/></div>
+        <div id="fluidSelector" class="fluid-col">This text should expand to fill 'the rest' of the page width not used by the image inside the fixed-width-col.
           This text should expand to fill 'the rest' of the page width not used by the image inside the fixed-width-col.
           This text should expand to fill 'the rest' of the page width not used by the image inside the fixed-width-col.
         </div>

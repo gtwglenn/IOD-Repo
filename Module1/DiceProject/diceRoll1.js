@@ -174,13 +174,11 @@ function appendResult (newResult) {
     // add new item to results list 
     resultList.appendChild(newItem); 
 
-    // change lastResult to newD6Result for new iteration 
+    // change lastResult to newResult for new iteration 
     lastResult = newResult; 
 
     console.log(newItem);
 
-
-    
 
 }
 
@@ -212,3 +210,117 @@ document.getElementById('d20button').addEventListener('click', function() {
 });
 
 
+
+
+/*      B O N U S       S E C T I O N     */
+
+
+function createHistory () {
+
+    
+
+}
+
+
+function displayHistory () {
+
+    
+
+}
+
+
+/*last result is null 
+
+/* 
+one click -> 'newResult' -> result PRIME [result 0]
+    - lastResult: null
+two click -> 'newResult' +  newResult overwrites 'lastResult' (null) -> 'newResult' + 'lastResult'
+    - add 'lastResult' value to 'resultArray' 
+three click -> 'newResult' + newResult overwrites... -> 'newResult' + 'lastResult' + 'resultArray'
+
+main issue is: each click overwrites 'lastResult', which starts as null 
+    - the cue to print results from RNG is the very same button 
+
+    --> so... massive (if?) loop for the number of clicks? 
+
+    so make a third variable? that's null? or? 
+
+
+--> make an array with the results? 
+    - could store values in array --> this should work because lastResult is null 
+
+
+
+    
+    ghiafhiurahfireafh
+
+    I think this is only difficult because I am limited to JavaScript
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

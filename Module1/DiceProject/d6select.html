@@ -33,6 +33,15 @@
     <ul id="resultList"></ul>
     <!-- placeholder for results -->
     <!-- clear after ??? results printed -->
+
+    
+
+    <!-- 
+    <div id="history" class="1Later" >
+        <p id="itGonnaGoHere"></p>
+    </div>
+    -->
+
 </div>
 
 
@@ -45,6 +54,41 @@
 
 
 </body>
+
+
+
+
+<!-- seneless rambling just ignore this  -->
+    <!-- 
+
+    memory issue explained: 
+    - button click gives you new number 
+    - result tab displays new number 
+    - button click again, new number becomes old number  (this much I can do )
+    - result tab displays new number, and old number 
+    - button click again, new number becomes old number 
+    - result tab displays new number, and old number, but not *older number*
+
+    so, .js function to create new variable "old number" + i (counter) 
+        button click again, print oldNumber ... 
+
+        ... essentially just print a newline + previous result *problem* 
+
+        ... would have to display it upside down, printing newline + new variable would be like this: 
+
+            results are (in order): 5, 2, 8, 3 
+
+            if you merely print newline + previous result, it would read out like 
+
+            5
+            2
+            8
+            3
+
+            you would want 3 to be displayed at the top, because it was the most recent previous result 
+
+
+    -->
 
 
 </html>
