@@ -1,0 +1,24 @@
+
+MODULE 2 LAB 1 NOTES 
+
+
+- learn 2 javascript syntax - especially constants vs/ constructors 
+
+- I thought I could use a checkbox to generate a boolean value but maybe no? sort of yes 
+
+	- checkbox --> typically check the 'checked' property directly 
+	
+	--> checkbox will only be the value specified (in HTML) when checked 
+
+	***you could turn it into a boolean value if you were a clever robot, like so: 
+
+		const isChecked = marketBox.checked ? 1 : 0;
+		console.log(isChecked);  
+
+	
+
+	DONT TRUST CHATGPT AND ITS SILLY LIES
+
+
+
+

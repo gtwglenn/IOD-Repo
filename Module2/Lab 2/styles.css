@@ -1,0 +1,47 @@
+body { 
+    margin: 0; 
+    font-family: sans-serif; 
+    font-size: 18px; 
+}
+
+header { 
+    display: flex; 
+    justify-content: space-between; /* Makes sure logo stays on the left */
+    background: black; 
+    padding: 1em; 
+}
+
+#logo { 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    background: #B200FF; 
+}
+
+.menu { 
+    display: flex; 
+    justify-content: flex-end; /* Aligns the list items to the right */
+    list-style: none; 
+    color: yellow; 
+    margin: 0; /* Removes default margin from ul */
+    padding: 0; /* Removes default padding from ul */
+}
+
+main { 
+    max-width: 80%; 
+    margin: 1em auto; 
+}
+
+.box { 
+    border-radius: 1em; 
+    min-width: 300px; 
+    min-height: 300px; 
+    border: 2px solid #404040; 
+    background: #B2B2B2; 
+    margin: 1em; 
+}
+
+#boxes {
+    display: flex; 
+    flex-wrap: wrap; 
+}
