@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: flex-start; /* Aligns items to the left */
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column; /* Aligns the child divs vertically */
+    margin-right: 20px; /* Space between left column and right div */
+  }
+  
+  .box {
+    background-color: #f2f2f2;
+    margin-bottom: 10px; /* Space between each box */
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .right-column {
+    background-color: #ddd;
+    padding: 20px;
+    width: 200px; /* Width of the static div */
+    position: sticky; /* Keeps the div in place while scrolling */
+    top: 0;
+  }

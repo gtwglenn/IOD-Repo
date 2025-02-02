@@ -1,0 +1,20 @@
+devsInc -- Dice Generator 
+
+users will arrive at landing page (homepage) for Dice Generator 
+
+- Dice selection page: User selects from three separate types of dice to spin 
+
+    - selection types: D6, D12, and D20 
+
+- Spin screen page: User is prompted by a graphical representation of a dice face (.png?) and a corresponding 'Spin' button 
+
+    - 'Spin' --> user presses button to spin the dice (initialize random number generator)
+
+- Results tab (Spin screen page): After each press of the 'Spin' button, 
+    the webpage will subsequently record the result of the last spin of the dice in the 'Results' tab
+
+
+
+
+
+* move to Dice Project? 
