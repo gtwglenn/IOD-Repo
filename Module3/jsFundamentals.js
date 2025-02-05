@@ -94,6 +94,7 @@ console.log(result);
 
 const getGreeting = function(name) {
     // let name = ???
+    // name variable is never established so...?
     //console.log('Hello ' + name + '!');
     return `Hello, ${name}!`;
 };
@@ -129,11 +130,11 @@ const inigo = {
 
     greeting(person) {  
         let greeting = `Hello ${person.name}, my name is ${this.firstName+` `+this.lastName}.`; 
-        console.log(greeting + this.getCatchPhrase(person)); 
+        console.log(greeting + ' ' + this.getCatchPhrase(person)); 
     },
 
     getCatchPhrase(person) { 
-        if (person.numFingers == 6){
+        if (person.numFingers === 6) {
             return 'Hello. My name is Inigo Montoya. You killed my father. Prepare to die.'; 
     }   else {
             return 'Nice to meet you.'; 
@@ -148,7 +149,7 @@ inigo.greeting(rugen)
 
 // last section of #6 // 
 
-const getCatchPhrase = (person) =>  (numFingers == 6) ? 'Hello. My name is Inigo Montoya. You killed my father. Prepare to die.' : 'Nice to meet you.';
+const getCatchPhrase = (person) =>  (numFingers === 6) ? 'Hello. My name is Inigo Montoya. You killed my father. Prepare to die.' : 'Nice to meet you.';
 
     // condition ? ifTrue : ifFalse; 
     // how do add greeting? 
@@ -172,6 +173,9 @@ const getCatchPhrase = (person) =>  (numFingers == 6) ? 'Hello. My name is Inigo
 const basketballGame = { 
 
     score: 0, 
+    fouls: 0,
+
+    // fouls and score categories confuse me because I don't know how you would separate HOME from AWAY team categories/property values
 
     freeThrow() { 
         this.score++; 
@@ -208,10 +212,6 @@ const basketballGame = {
         // prints halfTime score when called  
         return this; 
     },
-
-    // fouls and score categories confuse me because I don't know how you would separate HOME from AWAY team categories/property values
-
-    fouls: 0,
     
     personalFoul() {
         this.fouls++; 
@@ -222,6 +222,114 @@ const basketballGame = {
 
     
 }
+
+/*                          A   L   T   E   R   N   A   T   I   V   E   L   Y   
+
+            - ADD SEPARATE HOME AND AWAY OBJECTS -> USE METHOD CHAINING FOR HOME/AWAY TEAM STATS            */ 
+
+
+            const basketballGame = {
+                home: {
+                    score: 0,
+                    fouls: 0,
+                    
+                    // Method to increase score by 1 (free throw)
+                    freeThrow() {
+                        this.score++;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increase score by 2 (basket)
+                    basket() {
+                        this.score += 2;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increase score by 3 (three-pointer)
+                    threePointer() {
+                        this.score += 3;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increment fouls
+                    foul() {
+                        this.fouls++;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to print halftime score for home team
+                    halfTime() {
+                        console.log(`Home halftime score: ${this.score}, fouls: ${this.fouls}`);
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to print full-time score for home team
+                    fullTime() {
+                        console.log(`Home full-time score: ${this.score}, fouls: ${this.fouls}`);
+                    }
+                },
+                
+                away: {
+                    score: 0,
+                    fouls: 0,
+                    
+                    // Method to increase score by 1 (free throw)
+                    freeThrow() {
+                        this.score++;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increase score by 2 (basket)
+                    basket() {
+                        this.score += 2;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increase score by 3 (three-pointer)
+                    threePointer() {
+                        this.score += 3;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to increment fouls
+                    foul() {
+                        this.fouls++;
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to print halftime score for away team
+                    halfTime() {
+                        console.log(`Away halftime score: ${this.score}, fouls: ${this.fouls}`);
+                        return this; // Enable chaining
+                    },
+                    
+                    // Method to print full-time score for away team
+                    fullTime() {
+                        console.log(`Away full-time score: ${this.score}, fouls: ${this.fouls}`);
+                    }
+                }
+            };
+            
+            // Example of method chaining for both Home and Away teams:
+            basketballGame.home
+                .basket()
+                .freeThrow()
+                .basket()
+                .threePointer()
+                .foul()
+                .halfTime()
+                .fullTime();
+            
+            basketballGame.away
+                .freeThrow()
+                .basket()
+                .foul()
+                .threePointer()
+                .halfTime()
+                .foul()
+                .fullTime();
+
+
 
 
 
@@ -248,35 +356,45 @@ const sydney = {
     founded: '26 January 1788', 
     timezone: 'Australia/Sydney' 
 };
-
-
-for (const key in sydney) {
-    if (sydney.hasOwnProperty(key)) {
-
-        console.log(key, sydney[key]);
-    }
-
-}
-
+// create a new city object sydney 
 
 const stockholm = {
 
-//987,661
-    name: 'Stockholm',
-    population: 987661, 
-    state: 'NSW', 
-    founded: 'null null 1252',
-    timezone: 'Central European'
+    //987,661
+        name: 'Stockholm',
+        population: 987_661, 
+        state: 'NSW', 
+        founded: 'null null 1252',
+        timezone: 'Central European'
+    
+};
+// create new city object stockholm 
 
-}
 
-for (const key in stockholm) {
 
-    if (stockholm.hasOwnProperty(key)) {
+function printCityValues (city) {
 
-        console.log(key, sydney[key]);
+    for (const key in city) {
+        if (city.hasOwnProperty(key)) {
+
+        console.log(key + ':', city[key]);
+        }
+
     }
+
 }
+// function should look for key value pairs for the city object 
+    // console log key (first value) + ':', city[key] --> "firstvalue: second value" of key valued pairs (I think)
+
+// 'city' w/in function is waiting for an object to be passed into the function 
+
+
+printCityValues(sydney); 
+printCityValues(stockholm); 
+
+//calling the 'printCityValues ()' function to print the key valued pairs of obect 'sydney' and 'stockholm' 
+
+
 
 
 
@@ -288,26 +406,92 @@ for (const key in stockholm) {
 */
 
 let teamSports = ['Hockey', 'Cricket', 'Volleyball']; 
-let dog1 = 'Bingo'; 
+let dog1 = [ 'Bingo', 'Beagle' ]; 
+    // SHOULD create array dog1 w/ Bingo and Beagle values 
 let cat1 = { name: 'Fluffy', breed: 'Siberian' }; 
+    // creates object cat1 w/ 'name' and 'breed' properties 
+        // --> do make array w/ properties as values?? 
 
-let moreSports = teamSports; // ?? 
+let moreSports = teamSports; // make new array --> modify new array (other ways to do this)
 
-teamSports.push('Soccer', 'Basketball');
-teamSports.unshift('Football');  
-console.log(teamSports);
+moreSports.push('Soccer', 'Basketball');
+moreSports.unshift('Football');  
+console.log(moreSports);
+// this much is correct --> array modified to: ["Football","Hockey","Cricket","Volleyball","Soccer","Basketball"]
 
-let dog2 = dog1 // --> 9b. new value?? check slides? 
-let cat2 = cat1 // --> change name value 
+let dog2 = dog1; 
+let cat2 = Object.values(cat1);
 
-dog2.changeAThing('Bongo');
-cat2.fkadfh('Chonkus'); 
-// cat2 should become { name: Chonkus, breed: Siberian }
+console.log(dog2, cat2);
+
+// create new arrays dog2 & cat2 --> use splice to manipulate arrays 
+// use splice to do both at the same time? 
+// * can only use splice() on arrays -- cat1 is an object, use different method to change object properties 
+    // or find a way to turn cat2 into an array?? 
+
+dog2.splice(0, 2, 'Bongo', 'Doberman');
+    //splice --> change values of dog2 = [ 'Bongo', 'Doberman' ]; 
+cat2.splice(0, 2, 'Chonkus', 'Jaguar'); 
+    //splice --> change values of cat2 = [ 'Chonkus', 'Jaguar' ];
+
 
 console.log(dog2, cat2); 
 
 
 
+/*
+
+    10.)
+
+*/
+
+
+function Person(name, age) { 
+    this.name = name; 
+    this.age = Number(age); 
+    this.human = true; 
+
+    this.canDrive = function() {
+        return this.age >= 16;
+    };
+
+}
+
+let user1 = new Person('Chumba-Wumba', '372'); 
+console.log(user1);
+console.log(user1.canDrive());
+
+let user2 = new Person('Skippy', '4208'); 
+console.log(user2);
+console.log(user2.canDrive());
+
+
+
+class PersonClass {
+
+    constructor(name, age) {
+        this.name = name;
+        this.age = Number(age);
+    }
+
+    canDrive() {
+        return this.age >= 16;
+
+    }
+}
+
+let user3 = new PersonClass('Xarbon', '3000');
+console.log(user3);
+console.log(user3.canDrive());
+
+
+
+
+
+
+// use .JS node to check work 
+
+// .....or at least practice .JS node 
 
 
 
