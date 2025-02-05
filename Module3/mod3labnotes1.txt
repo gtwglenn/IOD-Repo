@@ -200,8 +200,17 @@ I really don't like the directions on the lab assigments
 
 
 
+
+
+Some things to review: 
+
+
+using 'this' in objects/methods
+	- this as the concurrent (new) object w/in a function or method 
+
 using a function's argument to pass objects as values 
 
+using arrow expression syntax (and other syntax to defeat spaghetti code)
 
 charAt() -- ??? 
 
@@ -218,6 +227,18 @@ using ternary operators can make for shorter code
 when why do make use const instead of let?? 
 
 
+
+
+objects can be similar to arrays, except that objects will have key value pairs 
+
+John Doe, 72 years old, male 
+
+array = [ John Doe, 72, male ]
+
+object Person = { name: John Doe, age: 72, sex: male }
+
+
+go over how to use key values in functions (see: 8)
 
 
 
