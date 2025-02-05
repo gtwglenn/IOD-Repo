@@ -35,3 +35,259 @@ MODULE 3 -- LAB EXERCISE NOTES
 	-- can be used to pass parameters to other functions (?)
 
 
+	
+
+
+   -- notes from Lab Assignment -- 
+
+
+- 6.) --> comma after closing bracket for greeting() method 
+
+	- per ChatBot9000: 
+
+		commas are used after the closing bracket of a method: 
+
+			- In an array or object literal --> using array/object that uses
+			methods as elements --> use comma to separate 
+
+			- function argument list (not what I was confused about) 
+
+
+
+7.) push() --> add elements to the end of an array 
+	unshift() --> beginning of the array 
+
+
+
+
+
+
+
+
+
+
+
+
+-- JS INTERMEDIATE -- 
+
+see notebook for other notes 
+maybe type up notes to do me a MEGA learn 
+
+
+*typed out (black backgrnd) code includes *function* examples 
+	example.function(blah) 
+
+*I may have been misusing comparitive operators, especially == ?? maybe 
+
+
+
+
+- S5 --> see: code examples for data precision and manipulation (is on the lab) 
+
+- S8 & S12 --> numerical precision (also on lab) 
+	- can't remember difference between numerical data types and such 
+
+
+- S14/15 --> using functions to check input data/strings 
+
+	*I couldn't remember how to do this and wanted to use it on a previous lab assignment 
+
+		isNan - numerical value  & isFinite - returns boolean value?? 
+
+		parsInt & parsFloat --> parse string values 
+
+			(int and float depending on how accurate you want the number to be) 
+
+
+- S20 - manipulating strings --> Kendrick mentioned this would definitely be on the lab assignment
+
+
+- S22-24 --> manipulating strings (definitely on lab assignment) 
+
+	*FIFO: push -> end; shift -> beginning
+	*LIFO: push -> (adds to) end; pop -> (takes from) end 
+
+		- pop --> extracts last element of array 
+		- push --> adds to end of array
+
+		- shift --> extracts first element 
+		- unshift --> adds element to beginning 
+
+
+- S26 - multidimensional arrays and matrices 
+
+- S27 - toString method --> wtf is this example?? 
+
+- S29/S30 - slice and splice method --> return elements from an array (on lab)
+
+	slice --> create a new array by slicing original array elements 
+
+		*slice(start, end)
+
+		*could use slice() to create new values (from existing values) --> slice string or array 
+
+	splice --> insert, remove, replace items in an array 
+		*modifies original array 
+
+		*have to create variable to track removed array elements, otherwise they are discarded
+
+		+ startIndex & deleteCount 
+			default is 0 unless specified 
+
+	*splice arguments (startIndex, deleteCount, + new items...) 
+
+- S31 - concat method (on lab) 
+	creates new array --> see example 
+
+- S32 - indexOf method --> looks for matching data value and returns index location (from array) 
+	*if value is missing from array --> returns -1
+
+	- S33 - lastIndexOf method --> same as indexOf method -- reads RTL for matching value 
+
+- S34 - join method -- easy way to print or return the items of an array w/ separator 
+		*see example -- can establish separator as an argument in the join() method
+			ex: join(' ') --> adds space between values as a separator 
+			default is a comma 
+
+- S35 - forEach method -- ask chatgpt because this example is wack 
+
+
+*go back and view recordings of lectures because I am a very good listener* 
+
+
+- S36 - testing for duplicates of data w/in arrays 
+
+
+- S38 (#8) - Map (method?) --> copy of array + transformation of elements 
+
+	- S46 - Map (object) 
+
+- S39 - Sort Method --> sorts the array by making a comparison between the elements 
+
+- S42 - reduce method --> maybe look at a video or something because I was only half listening 
+
+- S43 - combined/chained t/g arrays 
+
+- S46 - map --> collection of keyed data items (values of *any* type) 
+		keyed valued pairs* 
+
+
+	- S51 
+
+started half listening around ~slide 50 something 
+
+	--> check recording for 01/30 
+
+
+
+
+
+
+   -- Lab Assignment Notes -- 
+
+I really don't like the directions on the lab assigments 
+
+4.) write a function caleCase(cssProp) that "changes dash-separated CSS properties"... 
+
+	so do you want the function to read back the properties, just with the dashes removed? 
+
+	???? 
+
+
+5.) Template literals allow for embedding expressions (with ${}) inside strings, which makes them very handy for dynamic strings
+
+		*I wanted to use dynamic literals in another assingment
+
+
+
+
+
+Some things to review: 
+
+
+using 'this' in objects/methods
+	- this as the concurrent (new) object w/in a function or method 
+
+using a function's argument to pass objects as values 
+
+using arrow expression syntax (and other syntax to defeat spaghetti code)
+
+charAt() -- ??? 
+
+go over using Map and creating iterations of data 
+
+how do use NodeJS to check work 
+
+
+*maybe make separate notes sheet for intermediate and advanced 
+
+using ternary operators can make for shorter code 
+
+
+when why do make use const instead of let?? 
+
+
+
+
+objects can be similar to arrays, except that objects will have key value pairs 
+
+John Doe, 72 years old, male 
+
+array = [ John Doe, 72, male ]
+
+object Person = { name: John Doe, age: 72, sex: male }
+
+
+go over how to use key values in functions (see: 8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+				
+
+		
+
