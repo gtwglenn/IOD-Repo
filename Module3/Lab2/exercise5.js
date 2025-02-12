@@ -1,4 +1,4 @@
-//Module 3 - JS Intermediate - Question 4
+//Module 3 - JS Intermediate - Question 5
 //Garrard Glenn 
 
 
@@ -34,12 +34,53 @@ function currencyAddition(float1, float2) {
     // basically just +, -, * b/t two values (float1 & float2)
 
 
-function currencyOperation(float1, float2, operation) {
+function currencyOperation(float1, float2, operation, decimalPoint) {
+
+    // switch case function to cover all bases (+ - / *) 
+
+        // float1 -- switch for operation -- float2  
+
+        if (typeof numDecimals !== 'number' || numDecimals < 1 || numDecimals > 10) {       // if --> check for decimal value 
+
+            throw new Error("decimalPoint must be an integer between 1 and 10.");
+
+        }   // end if
+
+    let result; 
+
+    switch (operation) {
+
+        case '+':
+            result = float1 + float2;
+            break; 
+        
+        case '-':
+            result = float1 - float2;
+            break; 
+        
+        case '*':
+            result = float1 * float2;
+            break; 
+
+        case '/':
+            result = float1 / float2;
+            break; 
+
+        if (float2 === 0)   {
+
+            throw new Error("Unacceptable mathematical computation. Alert. Alert.");
+        }   // end if 
+
+        result = float1 / float2;
+        break; 
+        default:
+            throw new Error("Improper use of arithmetic. Please re-initialize when you have more brain.");
 
 
+    }       // end switch 
 
     
-
+    return parseFloat(result.toFixed(decimalPoint)); 
 
 }       // end function 
 
