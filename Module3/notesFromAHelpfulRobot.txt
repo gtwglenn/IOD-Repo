@@ -42,3 +42,17 @@ To create the function findMatchingAnimals(beginsWith) that returns a new array 
         
             both the animal names and beginsWith to lowercase before comparing.
 
+
+
+
+In JavaScript, the switch statement is an efficient way to compare a value against multiple potential options. It works well when you 
+
+	have several possible outcomes based on the same variable, and each outcome involves different code execution. Here's how to 
+
+		use a switch statement effectively:
+
+
+		*switch statement : one variable --> several outcomes w/ individual code execution 
+
+
+

@@ -202,6 +202,16 @@ I really don't like the directions on the lab assigments
 
 
 
+
+
+
+
+
+
+
+
+
+
 Some things to review: 
 
 
@@ -223,8 +233,10 @@ how do use NodeJS to check work
 
 using ternary operators can make for shorter code 
 
+switch case functions? like, when to use them 
 
-when why do make use const instead of let?? 
+
+
 
 
 

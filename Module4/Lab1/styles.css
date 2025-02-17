@@ -1,0 +1,103 @@
+
+body {
+
+    background-color: black;
+}
+
+
+.navBar {
+
+    height: 200px;
+    width: 99vw; 
+    background-image: url(/Module4/Lab1/src/Shape\ 2.png);
+    background-repeat: no-repeat; 
+    background-size: cover; 
+
+    text-align: center; 
+    padding-top: 20px; 
+
+    font-family:    Impact, sans-serif;
+
+}
+
+#rememberHtml h2 {
+
+    font-size: 24pt; 
+}
+
+#rememberHtml h3 {
+
+    font-size: 20pt; 
+}
+
+#callForHelp {
+
+    font-family: monospace;
+    line-height: 1.5; 
+    font-size: large; 
+    background-color: black;
+    color: white; 
+
+    padding-left: 5vw; 
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+
+
+}
+
+
+#firstWarning {
+
+    border-color: yellow;
+    border-radius: 5px;
+    border-style: dotted;  
+    
+
+    background-color: red; 
+    color: yellow; 
+    font-weight: bold; 
+    font-size: larger; 
+
+    text-align: center;
+    line-height: 1.5; 
+
+    width: 99vw;
+    padding-bottom: 10px;
+    padding-top: 10px; 
+}
+
+#firstWarning h3 {
+
+    letter-spacing: 0.5rem;
+}
+
+#calcMainAccess {
+
+    padding-top: 2px; 
+    padding-bottom: 20px; 
+
+    font-size: 18pt; 
+    padding-left: 30px; 
+    line-height: 1.25; 
+
+
+    background-color: white; 
+
+}
+
+
+
+.calcContainer {
+
+    background-color: whitesmoke;
+
+    padding-left: 30px;
+
+
+}
+
+
+#operator {
+
+    font-size: 14pt; 
+}
