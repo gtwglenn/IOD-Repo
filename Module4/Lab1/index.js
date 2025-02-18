@@ -44,7 +44,7 @@ function checkInput() {
             "I WOULDN'T DO THAT IF I WERE YOU! " + number,          // don't need + number?? 
             "I DON'T LIKE THAT NUMBER EITHER! " + number,
             "WELL OF COURSE YOU WOULD USE THAT NUMBER " + number,
-            "WHAT A BORING Num872b23 sdnerm mfei " + number
+            "STOP! BEFORE YOUR SIMPLE ARITHMETIC BORES ME TO DEATH! " + number
           
         ];
 
