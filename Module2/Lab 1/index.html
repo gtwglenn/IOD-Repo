@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- make default /head settings for future -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 Lab 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<nav class="navBar">
+    <h2>A totally functional navbar with fancy, dropdown buttons</h2>
+</nav>
+
+<div class="divContainer"> 
+
+    <form id="formId" class="formClass">
+
+        <label id="name" class="label">First name: </label>
+            <input type="text">
+            
+        <label id="name" class="label">Last name: </label>
+            <input type="text">
+
+            <br><br>
+        <label id="address" class="label">Address: </label>
+            <input type="text">
+
+            <br><br>
+        <label id="email" class="label">Email: </label>
+            <input type="text">
+
+            <br><br>
+        <!-- checkbox -->
+            <input type="checkbox" id="marketBox" class="marketBox" name="marketBox" value="marketYes">
+        <label for="marketBox">Check this box for specially curated, non-intrusive pop-up adver- I mean, suggestions.</label>
+
+        <br><br>
+
+        <fieldset id="fieldSet">
+
+            <legend>Select a t-shirt size: </legend>
+
+            <div>
+                <label>Small</label>
+                    <input type="radio" id="shirtSize" name="shirtSize" value="size" checked>
+            </div>
+
+            <div>
+                <label>Medium</label>
+                    <input type="radio" id="shirtSize" name="shirtSize" value="size" checked>
+            </div>
+
+            <div>
+                <label>Large</label>
+                    <input type="radio" id="shirtSize" name="shirtSize" value="size" checked>
+            </div>
+
+        </fieldset>
+
+        <br><br>
+        
+        <!-- change this 
+        <label for="birthday">Birthday (fix this):</label>
+            <input tpye="date" id="birthDay" name="birthDay" value="2025-01-01" min="1900-01-01" max="2025-01-01">
+            -->
+
+        <label for="birthday">Birthday:</label>
+            <input type="date" id="birthDay" name="birthDay">
+        
+
+    <!-- birthday -->
+    <!-- maybe do a drop down? or something cool -->
+
+    <br><br>
+    <button type="submit" id="submitBtn" class="button">Submit</button>
+    <br><br>
+
+    </form>
+
+    
+      
+
+    
+</div>
+
+<!-- form need: first+last names, address, email, checkbox for marketing, T-shirt size, bday, submit button 
+ 
+    +styling because that is so much fun
+    
+        use labels for *each* form field -->
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+<!-- BONUS FEATURES 
+ 
+    - validate form inputs (isNan, etc.)
+
+    - require marketing box to be checked 
+
+        - event listener for submit button -> checks checkbox value (boolean)
+
+
+
+
+-->
