@@ -62,7 +62,7 @@ function checkInput() {
               "I WOULDN'T DO THAT IF I WERE YOU! ",          // re-order these so they mix and match upon entry 
               "I DON'T LIKE THAT NUMBER EITHER! ",
               "WELL OF COURSE YOU WOULD USE THAT NUMBER ",
-              "WHAT A BORING Num872b23 sdnerm mfei " 
+              "STOP! BEFORE YOUR SIMPLE ARITHMETIC BORES ME TO DEATH! " 
             
           ];
   
@@ -73,7 +73,7 @@ function checkInput() {
             responseIndex = (responseIndex + 1) % responses.length;  // This will loop back to 0 after reaching the last index
           } else {
             // If it's not an integer but still a number (e.g., a decimal)
-            document.getElementById('calcResponseMsg').innerHTML = 'REALLY? A DECIMAL? WOW.';
+            document.getElementById('calcResponseMsg').innerHTML = 'CALCULATRON FINDS YOUR USE OF A DECIMAL POINT AMUSING!';
           }
         }
       }
