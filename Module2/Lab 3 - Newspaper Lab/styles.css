@@ -181,7 +181,7 @@
   #rightArticles {
 
     width: 40vw; 
-    font-size: large;
+    font-size: Large;
 
   }
 
@@ -293,7 +293,9 @@
     width: 58vw;
     border-radius: 5px;
     border-color: black;
+
   }
+
 
 
   

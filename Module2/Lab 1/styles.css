@@ -1,0 +1,39 @@
+
+
+.navBar {
+
+    text-align: center; 
+    background-color: forestgreen;
+    color: azure;
+    height: 70px; 
+    padding-top: 2px; 
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 2px; 
+}
+
+.divContainer {
+
+    padding-top: 10px;
+    border-style: solid;
+    border-width: 2px; 
+    border-radius: 2px;
+    border-color:darkslategrey; 
+}
+
+
+.formClass {
+
+    padding-top: 5px; 
+    padding-left: 15px; 
+    font-weight: bold; 
+    font-family:'Courier New', Courier, monospace; 
+}
+
+
+#fieldSet {
+
+    width: 25vw; 
+}
