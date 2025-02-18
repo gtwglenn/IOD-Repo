@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator.exe</title>
+        <link rel="stylesheet" href="robotCSS.css">
+    </head>
+
+<body>
+    
+<nav>
+
+<!-- adjust banner image for extra fun points ,':^D -->
+    <div id="rememberHtml" class="navBar">
+    
+        <h2>CALCULATRON MAINFRAME<br>ACCESS: GRANTED</h2>
+
+        <h3>PLEASE CHOOSE YOUR NUMBERS WISELY</h3>
+
+        <!-- or maybe something like CALCULATRON MAINFRAME ACCESS: GRANTED -->
+
+    </div>
+
+</nav>
+
+<div class="calcContainer">
+
+
+
+    <div id="unnecessaryDiv">
+        <p><br></p>
+        <h2>CALCULATOR.EXE INITIALIZED...</h2>
+
+        <h2>CALCULATRON DEMANDS THE USE OF DISCRETE NUMERALS *ONLY*</h2>
+    </div>
+
+
+    <div> 
+        
+        
+        <div>
+
+            <p>Enter first number:
+            <input type="text" id="userInput" oninput="checkInput()"> 
+            </p>
+
+            
+
+        </div>
+
+        <div>
+
+            <label for="operator">REMOVE LABEL</label>
+      
+            <select name="operator" id="operator">
+              <option value="add">+</option>
+              <option value="subtract">-</option>
+              <option value="multiply">&#x00D7;</option>
+              <option value="divide">&#247;</option>
+            </select>
+      
+        </div>
+
+        <div>
+
+            <p>Enter second number:
+            <input type="text" id="userInput1" oninput="checkInput1()"> 
+            </p>
+
+
+        </div>
+
+
+
+        <!-- <form method="POST" action="http://127.0.0.1:5500/form"> -->
+
+    </div>
+
+
+
+    <br><br>
+
+    <p id="calcResponseMsg"></p>
+
+    <br><br><br><br>
+
+    <button type="button" class="" id="calculate" onclick="">Submit</button>
+
+
+    <div id="resultDiv">
+        <p id="result"></p>
+
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script src="calcScript.js"></script>
+
+</body>
+
+</html>
+
+
+
+<!-- 
+ 
+CALCULATRON repeteadly attemps to stop the user from proceeding w/ calculator 
+
+    "THAT DOESN'T LOOK LIKE A GOOD NUMBER TO USE. MAYBE TRY ENTERING A DIFFERENT NUMBER."
+
+    "I DON'T LIKE THAT NUMBER EITHER. ARE YOU SURE YOU DON'T WANT TO GO PRACTICE YOUR ALPHABET INSTEAD?"
+
+    "OF COURSE YOU WOULD SELECT THAT NUMBER. EVERYONE ALWAYS PICKS THAT NUMBER."
+
+-->

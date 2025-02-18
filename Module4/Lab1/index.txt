@@ -1,0 +1,37 @@
+You will be building a calculator
+
+List the requirements, in this case you have a total of 4 requirements
+    Get data (two numbers)
+    Choose an operator
+    Get the result
+    Reset the screen
+
+Sketch the application - by hand, in Word, Google Docs, PowerPoint, etc
+
+    Include the sketch or a picture of your sketch
+
+Build the application you’ve designed
+
+
+
+
+It would be kind of lame to just do simple text / forms and print result 
+
+html: form -> input for first number 
+    --> validate user input --> return if error 
+
+html: form -> select operator (from dropdown list)
+
+html: form -> input for second number 
+    --> validate user input --> return if error 
+
+html: print result in separate div ? 
+    
+
+** (.js) pressing '=' or submit --> returns result 
+    pressing it twice, thrice, etc. --> repeat arithmetic ( operator & second number -> on top of result )
+
+*constant clear calculator button --> return to first step / clears calculator 
+
+
+
