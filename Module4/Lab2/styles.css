@@ -1,0 +1,49 @@
+
+
+nav {
+
+    text-align: center; 
+}
+
+.card {
+    border: 1px solid darkgray;
+    padding: 16px;
+    margin: 16px 0;
+    width: 300px;
+    display: inline-flex;
+    background-color: whitesmoke; 
+}
+
+.cardBody {
+    text-align: center;
+}
+
+.cardTitle {
+
+    font-family:Georgia, 'Times New Roman', Times, serif; 
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.cardText {
+    font-size: 1.2em;
+    margin-bottom: 16px;
+}
+
+.portfolio-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border: 2px solid black; 
+    border-radius: 5%; 
+}
+
+#cardList {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
+    min-height: 100vh; 
+    gap: 2%; 
+}

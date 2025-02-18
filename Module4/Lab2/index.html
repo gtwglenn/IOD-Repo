@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Lab 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    
+    <nav>
+        <h1>Using HTML Templates Looks Like This:</h1>
+    </nav>
+
+    <!-- template for artist card(s)-->
+    <template id="artistCardTemp">
+
+        <div class="card">
+            <div class="cardBody">
+                <div class="cardTitle"></div>
+                    <div class="cardText"></div>                
+            </div>
+        </div>
+
+    </template>
+
+    <!-- box order back-front: card, cardBody, cardTitle, cardText -->
+
+    <div id="cardList"></div>       <!-- (cloned)template is actually inserted here -->
+
+    <script src="script.js"></script>
+
+</body>
+
+
+</html>
+
+
+
+
+<!--    FOR MONDAY 
+
+
+- use end result of index1.html as example 
+    - make more betterer 
+        -> why my original function wouldn't work -> notes of that 
+
+- go over dynamically generated content -> using templates and dynamic arrays 
+
+        *I think the directions might be asking you to just make up an array w/ content already included 
+            (rather than what I initially thought?)
+
+        *Can how do use Bootstrap? For same idea 
+
+- I understand the concept of templates, but maybe look into other ways they can be used 
+        -> learn when/where to use them on future assignments 
+            (like I should be doing with loops but I keep forgetting)
+
+- appendChild() refresher 
+
+- add Lab2 folder to Mod4 branch just to see what happens ??? 
+    - Module4 branch now appears as 'Module4/Lab1' 
+
+
+-->
