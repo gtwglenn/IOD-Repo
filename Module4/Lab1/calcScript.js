@@ -21,15 +21,15 @@ function checkInput() {
           
           const responses = [
 
-            "I WOULDN'T DO THAT IF I WERE YOU! ",          // don't need + number?? 
-            "I DON'T LIKE THAT NUMBER EITHER! ",
-            "WELL OF COURSE YOU WOULD USE THAT NUMBER ",
-            "WHAT A BORING Num872b23 sdnerm mfei " 
+            "\nI WOULDN'T DO THAT IF I WERE YOU! ",          // don't need + number?? 
+            "\nI DON'T LIKE THAT NUMBER EITHER! ",
+            "\nWELL OF COURSE YOU WOULD USE THAT NUMBER ",
+            "\nI WOULDN'T COUNT THAT NUMBER EVEN IF I HAD FINGERS!" 
           
         ];
 
           // Display the current response and cycle to the next one
-          document.getElementById('calcResponseMsg').innerHTML = responses[responseIndex];
+          document.getElementById('calcResponseMsg').innerHTML = "Calculatron3000/msg/input: \n" + responses[responseIndex];
           
           // Update the responseIndex to cycle through the responses
           responseIndex = (responseIndex + 1) % responses.length;  // This will loop back to 0 after reaching the last index
@@ -49,7 +49,7 @@ function checkInput() {
   
       if (isNaN(userInput1) || userInput1 === ' ') {
           
-          document.getElementById('calcResponseMsg').innerHTML = 'ERROR: INSUFFICIENT SUPPLY OF DISCRETE NUMERALS';
+          document.getElementById('calcResponseMsg1').innerHTML = 'ERROR: INSUFFICIENT SUPPLY OF DISCRETE NUMERALS';
   
         } else {
           const number = Number(userInput1); 
@@ -67,13 +67,13 @@ function checkInput() {
           ];
   
             // Display the current response and cycle to the next one
-            document.getElementById('calcResponseMsg').innerHTML = responses[responseIndex];
+            document.getElementById('calcResponseMsg1').innerHTML = "Calculatron3000/msg/input: \n" + responses[responseIndex];
             
             // Update the responseIndex to cycle through the responses
             responseIndex = (responseIndex + 1) % responses.length;  // This will loop back to 0 after reaching the last index
           } else {
             // If it's not an integer but still a number (e.g., a decimal)
-            document.getElementById('calcResponseMsg').innerHTML = 'CALCULATRON FINDS YOUR USE OF A DECIMAL POINT AMUSING!';
+            document.getElementById('calcResponseMsg1').innerHTML = 'CALCULATRON FINDS YOUR USE OF A DECIMAL POINT AMUSING!';
           }
         }
       }
@@ -138,9 +138,13 @@ function calcResult() {
   }
 
   // Display the result
-  document.getElementById('result').innerText = "Result: " + result;
+  document.getElementById('result').innerText = "loading NUMcrunch.bat...\nloading...\nfinalizing arithmetic...\n " + result + "\n\nCALCULATRON HAS BEEN DEFEATED!";
 }
 
 // Event listener for the button click
 document.getElementById('calculate').addEventListener('click', calcResult);
+
+
+
+// *validation only reads first character in input field ? 
 

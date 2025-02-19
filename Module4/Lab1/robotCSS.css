@@ -16,15 +16,23 @@
     height: 100vh;
   }
   
-  /* Navigation bar styles */
+  /* ROBOT CSS --> don't have same issue with navbar banner ??? */
   .navBar {
-    background-color: #333;
+    /* background-color: #333; */
+
+    background-image: url(/Module4/Lab1/src/Shape\ 2.png);
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+    height: 15vh;
+    width: 99vw; 
+
     color: #fff;
-    width: 100%;
+    /* width: 100vw; */
     padding: 20px;
     text-align: center;
     position: sticky;
-    top: 0; /* Keep the navbar at the top of the screen when scrolling */
+    top: 0;             /* Keep the navbar at the top of the screen when scrolling */
     z-index: 10;
   }
   

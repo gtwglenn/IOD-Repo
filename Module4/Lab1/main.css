@@ -1,0 +1,127 @@
+
+body {
+
+    background-color: black;
+}
+
+
+.navBar {
+
+    height: 200px;
+    width: 99vw; 
+    background-image: url(/Module4/Lab1/src/Shape\ 2.png);
+    background-repeat: no-repeat; 
+    background-size: cover; 
+
+    text-align: center; 
+    padding-top: 20px; 
+
+    font-family:    Impact, sans-serif;
+
+}
+
+#rememberHtml h2 {
+
+    font-size: 24pt; 
+}
+
+#rememberHtml h3 {
+
+    font-size: 20pt; 
+}
+
+#callForHelp {
+
+    font-family: monospace;
+    line-height: 1.5; 
+    font-size: large; 
+    background-color: black;
+    color: white; 
+
+    padding-left: 5vw; 
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+
+
+}
+
+
+#firstWarning {
+
+    border-color: yellow;
+    border-radius: 5px;
+    border-style: dotted;  
+    
+
+    background-color: red; 
+    color: yellow; 
+    font-weight: bold; 
+    font-size: larger; 
+
+    text-align: center;
+    line-height: 1.5; 
+
+    width: 99vw;
+    padding-bottom: 10px;
+    padding-top: 10px; 
+}
+
+#firstWarning h3 {
+
+    letter-spacing: 0.5rem;
+}
+
+#calcMainAccess {
+
+    font-family: monospace; 
+
+    padding-top: 2px; 
+    padding-bottom: 20px; 
+
+    font-size: 18pt; 
+    padding-left: 30px; 
+    line-height: 1.25; 
+
+
+    background-color: white; 
+
+}
+
+
+/* <!-- or copy over button from 2nd page -->  */
+
+#calcMainAccessBtn {
+
+    width: 125px;
+    height: 55px;
+    font-family: monospace;
+    
+    margin-top: 25px;
+
+    border: 5px black; 
+    border-style: solid;   
+    border-radius: 1%; 
+     
+
+}
+
+button:hover,
+button:focus {
+    /* background: #aaaaaa; */
+    background: rgba(0, 0, 0, 0.829); 
+    font-weight: bold; 
+    box-shadow: 5em;
+
+    color: white; 
+}
+
+
+#pWord {
+
+    font-size: large; 
+    height: 30px; 
+}
+
+
+
+
