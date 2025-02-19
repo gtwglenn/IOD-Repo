@@ -1,0 +1,108 @@
+/* //Module 4 - Lab 2 
+//Garrard Glenn  */
+
+
+
+/*
+        card [ cardBody ]
+                -cardTitle
+                    -cardSubtitle 
+                        -cardText 
+
+                        +cardLink?? 
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+.card {
+
+    display: inline-flex;
+    flex-direction: column; 
+    width: 33vw; 
+    text-align: left;
+    padding: 10px 5px 10px 5px; 
+    line-height: 1.5;  
+
+    text-align: center; 
+}
+
+.cardBody {
+
+    background-color: rgb(255, 255, 255);
+
+    /* border: solid black;  */
+
+}
+
+.cardTitle {
+
+    /* background-color: blueviolet;
+    border: solid black; 
+    border-radius: 2em; */
+
+    font-size: 16pt;
+    font-weight: bold; 
+
+
+
+}
+
+.cardSubtitle {
+
+    /* border-bottom: solid black; 
+    border-left: solid black; 
+    border-right: solid black; 
+     */
+
+    margin-top: 2px; 
+
+    border: solid black; 
+    
+    border-radius: 1em;
+
+    background-color:rgb(238, 153, 74); 
+    font-size: 12pt; 
+
+}
+
+.cardText {
+
+    margin-top: 2px; 
+
+    background-color: rgb(161, 163, 167); 
+
+    border: solid black; 
+    border-radius: 1em; 
+
+    text-align: left; 
+    font-size: 14pt; 
+
+    padding: 5px 5px 5px 15px; 
+
+}
+
+
+.depth { 
+    --d: .3em; /* control the depth */
+    padding-block: .1em calc(.1em + var(--d));
+    padding-inline:.2em calc(.2em + var(--d));
+    background:
+      conic-gradient(at right var(--d) bottom var(--d),
+        #0004 37.5%,#0008 0 75%,#0000 0) 
+      #4bc49f; 
+    clip-path: polygon(0 0,calc(100% - var(--d)) 0,100% var(--d),100% 100%,var(--d) 100%, 0 calc(100% - var(--d)));
+    text-align: center;
+
+    border-right: 1px solid #02754f; 
+    border-bottom: 1px solid #02754f; 
+
+    border-top: 1px solid rgb(9, 156, 107); 
+
+    border-radius: .2em; 
+
+  }
