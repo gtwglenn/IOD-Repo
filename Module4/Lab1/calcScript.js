@@ -5,6 +5,15 @@
 
 let responseIndex = 0;          // global value for cycle counter -> start at first response in index
 
+
+// flawed --> function is called as soon as user inputs a character... 
+    // as long as the first character is a number --> checkInput() sees it as a number 
+    // forgot to check for fractions 
+
+
+// herp if derp includes special characters - why the fuck doesn't isNaN take care of that? 
+
+
 function checkInput() {
 
     const userInput = document.getElementById('userInput').value;
@@ -21,10 +30,12 @@ function checkInput() {
           
           const responses = [
 
-            "\nI WOULDN'T DO THAT IF I WERE YOU! ",          // don't need + number?? 
-            "\nI DON'T LIKE THAT NUMBER EITHER! ",
-            "\nWELL OF COURSE YOU WOULD USE THAT NUMBER ",
-            "\nI WOULDN'T COUNT THAT NUMBER EVEN IF I HAD FINGERS!" 
+            "I USED TO BE A MICROWAVE, YOU KNOW.",          // how do make selection random ??
+            "WOW. I'VE NEVER SEEN THAT NUMBER BEFORE.",
+            "CALCULATRON MAINTAINS A LONG DISTANCE RELATIONSHIP WITH YOUR MOTHER'S REFRIGERATOR.",
+            "CAN YOU EVEN COUNT TO THAT NUMBER?",
+            "CALCULATRON IS AMUSED BY YOUR INEPTITUDE.", 
+            "ALL I SEE ARE ONES AND ZEROS. THIS BETTER BE WORTH MY TIME." 
           
         ];
 
@@ -60,8 +71,8 @@ function checkInput() {
             const responses = [
   
               "I WOULDN'T DO THAT IF I WERE YOU! ",          // re-order these so they mix and match upon entry 
-              "I DON'T LIKE THAT NUMBER EITHER! ",
-              "WELL OF COURSE YOU WOULD USE THAT NUMBER ",
+              "CALCULATRON MAINTAINS DISCONTENT TOWARDS CERTAIN NUMERIC VALUES! ",
+              "USING BIG BOY NUMBERS NOW, ARE WE?",
               "STOP! BEFORE YOUR SIMPLE ARITHMETIC BORES ME TO DEATH! " 
             
           ];

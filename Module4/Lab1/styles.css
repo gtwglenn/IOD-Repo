@@ -119,12 +119,6 @@
     /* text-align: center; */
   }
 
-  /* .inputDiv {
-
-    display: flex; 
-    justify-content: flex-end; 
-  } */
-
 
 .calcBody {
 
@@ -160,7 +154,7 @@
 
     
     background-color: black; 
-    color: green; 
+    color: #12a712; 
 
     width: 60vw; 
 
@@ -249,7 +243,7 @@ input[type="text"]:focus, select:focus {
     background-color: #747474;
   }
 
-button {
+/* button {
 
     align-self: center;
 
@@ -257,8 +251,34 @@ button {
     width: 10vw;
     height: 5vh;
 
+} */
+
+
+button {
+
+  width: 125px;
+  height: 55px;
+  font-family: monospace;
+  
+  margin-top: 25px;
+
+  border: 5px black; 
+  border-style: solid;   
+  border-radius: 1%; 
+  
+
+
 }
 
+button:hover,
+button:focus {
+  /* background: #aaaaaa; */
+  background: rgba(0, 0, 0, 0.829); 
+  font-weight: bold; 
+  box-shadow: 5em;
+
+  color: white; 
+}
 
 
 
