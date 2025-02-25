@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator.exe</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+<body>
+    
+<nav>
+
+<!-- adjust banner image for extra fun points ,':^D -->
+    <div id="rememberHtml" class="navBar">
+    
+        <h2>CALCULATRON MAINFRAME<br>ACCESS: GRANTED</h2>
+
+        <h3>PLEASE CHOOSE YOUR NUMBERS WISELY</h3>
+
+        <!-- or maybe something like CALCULATRON MAINFRAME ACCESS: GRANTED -->
+
+    </div>
+
+</nav>
+
+<div class="calcContainer">
+
+
+
+    <div id="unnecessaryDiv">
+        <p><br></p>
+        <h2>CALCULATOR.EXE INITIALIZED...</h2>
+        <br>
+
+        <h2>CALCULATRON INSISTS ON THE USE OF DISCRETE NUMERALS *ONLY*</h2>
+        <p><br></p>
+        <p><br></p>
+        <p class="userInput" id="numInput1">placeholder text</p>
+        <p><br></p>
+        <p><br></p>
+        <p class="responseMsg" id="calcResponseMsg"><br></p>
+        <p><br></p>
+        <p><br></p>
+        <p class="userInput" id="numInput2">placeholder text</p> 
+        <p><br></p>
+        <p class="responseMsg" id="calcResponseMsg1"><br></p>
+        <p><br></p>
+        <p id="result"></p>
+        <p><br></p>         <!-- print result here -->
+    </div>
+
+
+    <div class="calcBody"> 
+
+        <div class="operateDiv">
+
+            <label for="operator">Please do this to my numbers, Calculatron: </label>
+      
+            <select name="operator" id="operator">
+              <option value="add">+</option>
+              <option value="subtract">-</option>
+              <option value="multiply">&#x00D7;</option>
+              <option value="divide">&#247;</option>
+            </select>
+      
+        </div>
+        
+        
+        <div class="inputDiv">
+
+            <!-- <p>Enter first number:  move prompt to console screen -->
+
+            <!-- <input type="text" id="userInput" oninput="checkInput()">               change input to buttons to restrict user input -->
+
+            <button type="button" class="" id="7" onclick="userClickNum(event)">7</button>
+            <button type="button" class="" id="8" onclick="userClickNum(event)">8</button>
+            <button type="button" class="" id="9" onclick="userClickNum(event)">9</button>
+                <br>
+            <button type="button" class="" id="4" onclick="userClickNum(event)">4</button>
+            <button type="button" class="" id="5" onclick="userClickNum(event)">5</button>
+            <button type="button" class="" id="6" onclick="userClickNum(event)">6</button>    <!-- 1-9, 0 -->
+                <br>
+            <button type="button" class="" id="1" onclick="userClickNum(event)">1</button>
+            <button type="button" class="" id="2" onclick="userClickNum(event)">2</button>
+            <button type="button" class="" id="3" onclick="userClickNum(event)">3</button>
+                <br> 
+            <button type="button" class="" id="0" onclick="userClickNum(event)">0</button>
+            <button type="button" class="" id="clear" onclick="CLEAR_FUNCTION_NAME(event)">Clear</button>
+            <button type="button" class="" id="enter" onclick="ENTER_FUNCTION_NAME(event)">Enter</button>
+            
+
+            <!-- </p> -->
+
+        </div>
+
+
+        <!-- <button type="button" class="" id="calculate" onclick="">Submit</button> -->
+
+        <!-- <form method="POST" action="http://127.0.0.1:5500/form"> -->
+
+    </div>
+
+
+
+    <br><br>
+    
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script src="calcScript1.js"></script>
+
+</body>
+
+</html>           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
