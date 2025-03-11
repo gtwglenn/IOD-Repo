@@ -11,10 +11,10 @@ let responseIndex = 0;          // global value for cycle counter -> start at fi
     // forgot to check for fractions 
 
 
-// herp if derp includes special characters - why the fuck doesn't isNaN take care of that? 
 
 
-function checkInput() {
+
+function checkInput() {                                               
 
     const userInput = document.getElementById('userInput').value;
 
@@ -88,6 +88,15 @@ function checkInput() {
           }
         }
       }
+
+
+
+              // could still use these^ functions to trigger responses + store 2 separate data values (whole point of calculator exercise)
+
+
+
+
+
 //    "THAT DOESN'T LOOK LIKE A GOOD NUMBER TO USE. MAYBE TRY ENTERING A DIFFERENT NUMBER."
 
 //    "I DON'T LIKE THAT NUMBER EITHER. ARE YOU SURE YOU DON'T WANT TO GO PRACTICE YOUR ALPHABET INSTEAD?"
