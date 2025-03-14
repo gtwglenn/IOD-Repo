@@ -1,0 +1,294 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+ 
+  body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100vh;
+  }
+
+
+.navBar {
+
+    height: 200px;
+    width: 100vw; 
+    background-image: url(/Module4/Lab1/src/Shape\ 2.png);
+    background-repeat: no-repeat; 
+    background-size: cover; 
+
+    text-align: center; 
+    padding-top: 20px; 
+
+    font-family:    Impact, sans-serif;
+
+}
+
+#rememberHtml h2 {
+
+    font-size: 24pt; 
+}
+
+#rememberHtml h3 {
+
+    font-size: 20pt; 
+}
+
+#callForHelp {
+
+    font-family: monospace;
+    line-height: 1.5; 
+    font-size: large; 
+    background-color: black;
+    color: white; 
+
+    padding-left: 5vw; 
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+
+
+}
+
+
+#firstWarning {
+
+    border-color: yellow;
+    border-radius: 5px;
+    border-style: dotted;  
+    
+
+    background-color: red; 
+    color: yellow; 
+    font-weight: bold; 
+    font-size: larger; 
+
+    text-align: center;
+    line-height: 1.5; 
+
+    width: 99vw;
+    padding-bottom: 10px;
+    padding-top: 10px; 
+}
+
+#firstWarning h3 {
+
+    letter-spacing: 0.5rem;
+}
+
+#calcMainAccess {
+
+    padding-top: 2px; 
+    padding-bottom: 20px; 
+
+    font-size: 18pt; 
+    padding-left: 30px; 
+    line-height: 1.25; 
+
+
+    background-color: white; 
+
+}
+
+
+
+
+
+
+
+.calcContainer {
+
+    background-color: whitesmoke;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+    /* width: 350px; */ 
+    width: 65vw; 
+    margin-top: 20px; /* Space between navbar and calculator */
+
+    display: flex;
+    flex-direction: column; 
+
+    /* text-align: center; */
+  }
+
+
+.calcBody {
+
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: none; 
+    align-items: flex-end;
+    
+    margin-right: 26vw;
+
+}
+
+.calcBody p {
+
+    font-family: monospace;
+    font-size: 14pt; 
+    /* font-weight: bold;  */
+}
+
+
+#operator {
+
+
+    font-weight: bold; 
+    font-size: 18pt; 
+
+    padding: 10px 10px 10px 10px; 
+    
+}
+
+
+#unnecessaryDiv {
+
+    
+    background-color: black; 
+    color: #12a712; 
+
+    width: 60vw; 
+
+    border-style: solid; 
+    font-family: monospace; 
+    line-height: 1.25; 
+
+    text-align: left; 
+    padding-left: 15px; 
+
+}
+
+.calcContainer input {
+
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    width: 58px;
+    height: 50px;  
+
+}
+
+
+#result {
+
+    font-size: 16pt;
+    font-weight: bold; 
+}
+
+
+/*  necessary because precedence and I have gone waaaay too far to rewrite all of this  */
+ #calcResponseMsg, #calcResponseMsg1 {
+
+    color: red; 
+    text-decoration: overline underline;
+    font-size: 14pt;  
+}
+
+
+
+
+/* B O N U S    F E A T U R E S */
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .calcContainer {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    input[type="text"], select, button {
+      width: 100%;
+    }
+  }
+
+
+/* .inputDiv {
+
+    text-align: right; 
+    margin-right: 20vw; 
+
+    /* 
+    a smarter way to do this would be to keep track of the 
+        UI values so you can actually calculate % of screen/# of pixels 
+
+        or combine .inputDiv rules w/ #operator rules 
+    */
+
+
+/*} 
+*/
+
+
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #56f27d;
+    box-shadow: 0 0 8px rgba(86, 166, 242, 0.5);
+  }
+
+  button:hover {
+    background-color: #5e5f5e;
+  }
+  
+  button:active {
+    background-color: #747474;
+  }
+
+/* button {
+
+    align-self: center;
+
+    background-color:#b3b3b3;
+    width: 10vw;
+    height: 5vh;
+
+} */
+
+
+button {
+
+  width: 125px;
+  height: 55px;
+  font-family: monospace;
+  
+  margin-top: 25px;
+
+  border: 5px black; 
+  border-style: solid;   
+  border-radius: 1%; 
+  
+
+
+}
+
+button:hover,
+button:focus {
+  /* background: #aaaaaa; */
+  background: rgba(0, 0, 0, 0.829); 
+  font-weight: bold; 
+  box-shadow: 5em;
+
+  color: white; 
+}
+
+
+.userInput {
+
+  font-size: 12pt; 
+}
+
+
+
+
+
+
+/* center input fields + operator selction --> make more like robot style but not 
