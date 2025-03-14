@@ -75,11 +75,11 @@
 
                 
 
-let count = 0; // Track how many times 'ENTER' is clicked
-let numInput1 = null; // First number
-let numInput2 = null; // Second number
-let result = null; // Calculation result
-let operator = null; // Operator selected from dropdown
+let count = 0; 
+let numInput1 = null; 
+let numInput2 = null; 
+let result = null; 
+let operator = null; 
 
 function userClickNum(event) {
 
