@@ -4,6 +4,8 @@ let numInput2 = null;
 let result = null; 
 let operator = null; 
 
+
+                                                        // function --> display responses upon each number click 
 function userClickNum(event) {
     const responses = [
         "I USED TO BE A MICROWAVE, YOU KNOW.",
@@ -19,16 +21,19 @@ function userClickNum(event) {
     const numInput = count === 0 ? document.getElementById('numInput1') : document.getElementById('numInput2');
 
     // Update display text for current input
-    numInput.innerText += elementId + ' '; 
+    numInput.innerText += elementId + ' ';                  // this should add a space between the numbers that are displayed but it doesn't ??? 
 
     // Update the response message
     let responseIndex = Math.floor(Math.random() * responses.length);
     document.getElementById('calcResponseMsg').innerHTML = "Calculatron3000/msg/input: \n" + responses[responseIndex];
 }
 
+                                                        // function that cycles for each ENTER press 
 function ENTER_FUNCTION_NAME(event) {
+
     if (count === 0) {
         numInput1 = document.getElementById('numInput1').innerText.trim(); // Store first number
+
         if (isNaN(numInput1) || numInput1 === "") {
             alert("Please enter a valid first number!");
             return;
@@ -40,12 +45,15 @@ function ENTER_FUNCTION_NAME(event) {
         // Prompt for second number
         document.getElementById('numInput1').innerText = "[Hint] Enter a second number...";
         document.getElementById('calcResponseMsg').innerHTML = "Calculatron3000/msg/input: I DARE YOU TO THINK OF A DIFFERENT NUMBER THAN THAT PUNY DIGIT!";
+
     } else if (count === 1) {
         numInput2 = document.getElementById('numInput2').innerText.trim(); // Store second number
+
         if (isNaN(numInput2) || numInput2 === "") {
             alert("Please enter a valid second number!");
             return;
         }
+
         operator = document.getElementById('operator').value; // Get selected operator
         count++;
 
@@ -58,6 +66,12 @@ function ENTER_FUNCTION_NAME(event) {
 
     }
 }
+
+
+// lines 37 & 52 --> maybe rather have input changed to '0' rather than prompting user ?? 
+
+
+
 
 function calculateResult() {
     // Prepare the URL for the backend API based on the operator
@@ -83,7 +97,8 @@ function calculateResult() {
         });
 }
 
-// Following function will be a problem moving forward into Module 5 -- it resets the numInput values 
+// Following function will be a problem moving forward -- it resets the numInput values 
+
 function resetInputs() {
     // Reset all inputs and counter for new calculation
     count = 0;

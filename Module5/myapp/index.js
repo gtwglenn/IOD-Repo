@@ -11,13 +11,7 @@ app.use('/mytest', testRoutes);
 
 //app.use('/calculator, calcRoutes);    ?? 
 
-app.listen(port, () => {
- console.log(`Example app listening at http://localhost:${port}`)
-});
-
-
 app.use('/', express.static('public')); 
-
 
 
 
@@ -26,3 +20,10 @@ const calculatorRoutes = require('./routes/calculatorRoutes.js');
  // map the calculator routes to our app
 
 app.use('/calculator', calculatorRoutes);
+
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+   });
