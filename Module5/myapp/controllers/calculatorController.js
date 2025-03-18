@@ -1,45 +1,46 @@
-// calculatorController.js
+const Calculator = require('../library/calculator');
 
-const add = (req, res) => {
-    let number1 = parseInt(req.query.num1);
-    let number2 = parseInt(req.query.num2);
-    let sum = number1 + number2;
-    console.log(sum);
-    res.status(200).json({ result: sum });
-};
+const calculator = new Calculator();
 
-const subtract = (req, res) => {
-    let number1 = parseInt(req.query.num1);
-    let number2 = parseInt(req.query.num2);
-    let difference = number1 - number2;
-    console.log(difference);
-    res.status(200).json({ result: difference });
-};
+const calculatorController = {
+    add: (req, res) => {
+        const { num1, num2 } = req.query;
+        if (isNaN(num1) || isNaN(num2)) {
+            return res.status(400).json({ error: "Invalid input. Please provide numbers." });
+        }
+        const result = calculator.add(parseFloat(num1), parseFloat(num2));
+        res.json({ id: calculator.id, result });
+    },
 
-const multiply = (req, res) => {
-    let number1 = parseInt(req.query.num1);
-    let number2 = parseInt(req.query.num2);
-    let product = number1 * number2;
-    console.log(product);
-    res.status(200).json({ result: product });
-};
+    subtract: (req, res) => {
+        const { num1, num2 } = req.query;
+        if (isNaN(num1) || isNaN(num2)) {
+            return res.status(400).json({ error: "Invalid input. Please provide numbers." });
+        }
+        const result = calculator.subtract(parseFloat(num1), parseFloat(num2));
+        res.json({ id: calculator.id, result });
+    },
 
-const divide = (req, res) => {
-    let number1 = parseInt(req.query.num1);
-    let number2 = parseInt(req.query.num2);
+    multiply: (req, res) => {
+        const { num1, num2 } = req.query;
+        if (isNaN(num1) || isNaN(num2)) {
+            return res.status(400).json({ error: "Invalid input. Please provide numbers." });
+        }
+        const result = calculator.multiply(parseFloat(num1), parseFloat(num2));
+        res.json({ id: calculator.id, result });
+    },
 
-    if (number2 === 0) {
-        return res.status(400).json({ error: "Cannot divide by zero" });
+    divide: (req, res) => {
+        const { num1, num2 } = req.query;
+        if (isNaN(num1) || isNaN(num2)) {
+            return res.status(400).json({ error: "Invalid input. Please provide numbers." });
+        }
+        if (parseFloat(num2) === 0) {
+            return res.status(400).json({ error: "Cannot divide by zero." });
+        }
+        const result = calculator.divide(parseFloat(num1), parseFloat(num2));
+        res.json({ id: calculator.id, result });
     }
-
-    let quotient = number1 / number2;
-    console.log(quotient);
-    res.status(200).json({ result: quotient });
 };
 
-module.exports = {
-    add,
-    subtract,
-    multiply,
-    divide
-};
+module.exports = calculatorController;
