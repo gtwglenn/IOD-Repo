@@ -1,4 +1,7 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+
 const app = express();
 const port = 3000;
 
@@ -29,3 +32,15 @@ app.use('/calculator', calculatorRoutes);
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
    });
+
+
+// Load Swagger JSON
+const swaggerDocument = JSON.parse(fs.readFileSync('./swagger.json', 'utf8'));
+
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Swagger docs available at http://localhost:${port}/api-docs`);
+});
