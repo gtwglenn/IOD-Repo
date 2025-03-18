@@ -1,0 +1,158 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Calculator API",
+      "description": "API for basic arithmetic operations."
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/calculator/add": {
+        "get": {
+          "summary": "Add two numbers",
+          "parameters": [
+            {
+              "name": "num1",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "First number"
+            },
+            {
+              "name": "num2",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "Second number"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "result": { "type": "number" }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/calculator/subtract": {
+        "get": {
+          "summary": "Subtract two numbers",
+          "parameters": [
+            {
+              "name": "num1",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "First number"
+            },
+            {
+              "name": "num2",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "Second number"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "result": { "type": "number" }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/calculator/multiply": {
+        "get": {
+          "summary": "Multiply two numbers",
+          "parameters": [
+            {
+              "name": "num1",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "First number"
+            },
+            {
+              "name": "num2",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "Second number"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "result": { "type": "number" }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/calculator/divide": {
+        "get": {
+          "summary": "Divide two numbers",
+          "parameters": [
+            {
+              "name": "num1",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "First number"
+            },
+            {
+              "name": "num2",
+              "in": "query",
+              "required": true,
+              "type": "number",
+              "description": "Second number (cannot be zero)"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "result": { "type": "number" }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input or division by zero"
+            }
+          }
+        }
+      }
+    }
+  }
+  
