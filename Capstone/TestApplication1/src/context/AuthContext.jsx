@@ -37,3 +37,7 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+
+
+// changes for GIT commit 

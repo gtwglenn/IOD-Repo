@@ -11,3 +11,6 @@ export default function MyHome() {
 //add <MyProfile />
 // <MyProfile /> should include LocalSchedule or something similar 
 // do NOT want SideCalendar --> make separate sidebar for MySchedule (only page that will have SideCalendar)
+
+
+// changes for GIT commit 

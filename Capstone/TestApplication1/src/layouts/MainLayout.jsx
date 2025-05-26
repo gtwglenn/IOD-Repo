@@ -11,3 +11,6 @@ export default function MainLayout({ children }) {
 }
 
 // so with <Sidebar /> as a child of the main Box --> Sidebar appears on every page that uses <MainLayout /> 
+
+
+// changes for GIT commit 

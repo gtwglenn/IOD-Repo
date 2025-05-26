@@ -71,3 +71,7 @@ export default function AppRouter() {
 
 // Q - since I have <Routes /> inside of <BrowserRouter /> --> which are both inside of AppRouter() -- <AppRouter /> inside of App() 
 // nvm since you are importing BrowserRouter from a dependency and not from AppRouter() ??? 
+
+
+
+// changes for GIT commit 

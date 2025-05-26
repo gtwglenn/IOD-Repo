@@ -48,3 +48,7 @@ module.exports = (sequelize, DataTypes) => {
 
   return User;
 };
+
+
+
+// changes for GIT commit 

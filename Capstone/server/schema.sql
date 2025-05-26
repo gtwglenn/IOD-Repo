@@ -27,3 +27,6 @@ CREATE TABLE IF NOT EXISTS users (
 -- Add test user
 INSERT IGNORE INTO users (first_name, last_name, username, password, email) VALUES 
 ('Test', 'User', 'testuser', '$2b$10$eYtkgz1Or1dTJGc1A9z3YuklG3b0kDpoI9nIojg49wPBXrxKmnUJK', 'test@example.com');
+
+
+-- // changes for GIT commit 
