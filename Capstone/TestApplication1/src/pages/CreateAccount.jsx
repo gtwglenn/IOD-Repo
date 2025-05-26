@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import {
   Container,
   Box,
@@ -7,7 +9,6 @@ import {
   Button,
   Paper,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
   const [firstName, setFirstName] = useState("");
@@ -17,22 +18,20 @@ export default function CreateAccount() {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
+  const { login } = useAuth(); // 👈 Get login from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const username = `${firstName} ${lastName}`.trim();
-
     const newUser = {
       firstName,
       lastName,
-      username,  
       email,
       password,
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/signup", {
+      const response = await fetch("http://localhost:5000/api/create-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,24 +41,16 @@ export default function CreateAccount() {
 
       const data = await response.json();
 
-    if (response.ok) {
-        if (data.token) {
-            localStorage.setItem("token", data.token);
-            navigate("/home"); // or your protected page
-        } else {
-            setMessage("Account created successfully!");
-            // setTimeout(() => navigate("/"), 1500); // ⬅️ your actual login route
-            setTimeout(() => navigate("/create-profile"), 1500);
-        }
-        } else {
+      if (response.ok && data.token) {
+        login(data.user, data.token); // 👈 Store token + user in context + localStorage
+        navigate("/create-profile"); // ✅ You can now update profile with JWT
+      } else {
         setMessage(data.message || "Signup failed.");
-        } 
-        
+      }
     } catch (err) {
-            console.error("Error signing up.", err);
-            setMessage("Server error.");
-        }
-
+      console.error("Error signing up:", err);
+      setMessage("Server error.");
+    }
   };
 
 

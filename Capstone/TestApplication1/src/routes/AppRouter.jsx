@@ -6,7 +6,7 @@ import MyHome from "../pages/MyHome";
 import MySchedule from "../pages/MySchedule";
 import StoreLocator from "../pages/StoreLocator";
 import MainLayout from "../layouts/MainLayout";
-//import SecondaryLayout from "../layouts/SecondaryLayout";
+import SecondaryLayout from "../layouts/SecondaryLayout";
 import ProtectedRoute from "../components/ProtectedRoute.jsx"
 
 export default function AppRouter() {
@@ -31,22 +31,13 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/schedule"
-          element={
-            <MainLayout>
-              <MySchedule />
-            </MainLayout>
-          }
-        /> */}
-
         <Route
           path="/schedule"
           element={
             <ProtectedRoute>
-              <MainLayout>
+              <SecondaryLayout>
                 <MySchedule />
-              </MainLayout>
+              </SecondaryLayout>
             </ProtectedRoute>
           }
         />

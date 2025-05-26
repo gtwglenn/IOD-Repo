@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
@@ -7,36 +8,36 @@ import {
   Button,
   Paper,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        login(data.user, data.token); // Store in context or localStorage
-        navigate("/home");
-      } else {
-        alert("Login failed: " + (data.message || "Unknown error"));
+      if (!res.ok) {
+        throw new Error("Invalid login credentials");
       }
+
+      const { token, user } = await res.json();
+      login(user, token);
+      navigate("/home");
     } catch (err) {
-      console.error("Login error:", err);
-      alert("An error occurred during login.");
+      setErrorMsg(err.message || "Login failed");
     }
   };
 
@@ -60,6 +61,13 @@ export default function LoginPage() {
           <Typography variant="h4" align="center" gutterBottom>
             Music Schedule Bot 9000
           </Typography>
+
+          {errorMsg && (
+            <Typography color="error" align="center" sx={{ mb: 2 }}>
+              {errorMsg}
+            </Typography>
+          )}
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
             <TextField
               fullWidth
@@ -102,8 +110,3 @@ export default function LoginPage() {
     </Container>
   );
 }
-
-
-
-
-// changes for GIT commit 

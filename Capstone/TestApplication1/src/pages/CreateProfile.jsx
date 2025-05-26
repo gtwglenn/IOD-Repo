@@ -1,127 +1,53 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
   Typography,
-  Button,
   Paper,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
-
-
-// for select role: employee/teacher --> additional: select store# 
-
+import { useAuth } from "../context/AuthContext";
 
 export default function CreateProfile() {
-  const location = useLocation();
-  const newUser = location.state?.newUser || {};
+  const { fetchUser } = useAuth();
+  const navigate = useNavigate();
 
-  const [instrument, setInstrument] = useState("");
   const [role, setRole] = useState("");
+  const [instrument, setInstrument] = useState("");
   const [message, setMessage] = useState("");
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (!instrument || !role) {
-  //     setMessage("Please select both an instrument and a role.");
-  //     return;
-  //   }
-
-  //   console.log("Final profile created:", {
-  //     ...newUser,
-  //     Instrument: instrument,
-  //     Role: role,
-  //   });
-
-  //   setMessage("Profile created successfully!");
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!instrument || !role) {
-  //     setMessage("Please select both an instrument and a role.");
-  //     return;
-  //   }
-
-  //   const completeUser = {
-  //     ...newUser,
-  //     instrument,
-  //     role,
-  //   };
-
-  //   try {
-  //     const response = await fetch("http://localhost:5000/api/update-profile", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`, // if using JWT
-  //       },
-  //       body: JSON.stringify(completeUser),
-  //     });
-
-  //     const result = await response.json();
-
-  //     if (response.ok) {
-  //       setMessage("Profile created successfully!");
-  //       setTimeout(() => {
-  //         // Redirect to home/dashboard after profile creation
-  //         window.location.href = "/home";
-  //       }, 1500);
-  //     } else {
-  //       setMessage(result.message || "Failed to create profile.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Error submitting profile:", err);
-  //     setMessage("Server error.");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setMessage("");
 
-  const token = localStorage.getItem("token"); // Adjust if you're storing it elsewhere
+    try {
+      const res = await fetch("http://localhost:5000/api/update-profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ instrument, role }),
+      });
 
-  try {
-    const response = await fetch("http://localhost:5000/api/update-profile", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ instrument, role }),
-    });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "Profile update failed");
+      }
 
-    if (!response.ok) {
-      const text = await response.text();
-      console.error("Error submitting profile:", text);
-      setMessage(text); // Optional: show error to user
-      return;
+      await fetchUser(); // Refresh user context
+      setMessage("Profile updated successfully!");
+      navigate("/home");
+    } catch (err) {
+      console.error("Profile error:", err);
+      setMessage(err.message || "Something went wrong.");
     }
-
-    const data = await response.json();
-    console.log("Profile update success:", data);
-    setMessage("Profile updated successfully!");
-    // Navigate or refresh user state here if needed
-
-  } catch (error) {
-    console.error("Error submitting profile:", error);
-    setMessage("Something went wrong. Please try again.");
-  }
-};
-
-
-
-
-
-
-  
-
+  };
 
   return (
     <Container maxWidth="sm">
@@ -139,9 +65,8 @@ export default function CreateProfile() {
           <Typography variant="h4" align="center" gutterBottom>
             Complete Your Profile
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
-            
 
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
             <FormControl fullWidth required margin="normal">
               <InputLabel>Select Role</InputLabel>
               <Select
@@ -194,16 +119,3 @@ export default function CreateProfile() {
     </Container>
   );
 }
-
-
-
-// changes for GIT commit 
-
-
-// user should be directed to home after creating profile 
-// profile is then loaded center screen on home 
-// maybe let them upload a profile picture if I have time 
-// [                    ]
-// [  contact info      ]
-// [  role              ]
-// [  etc.              ]

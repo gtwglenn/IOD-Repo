@@ -18,6 +18,7 @@ export default function MyHome() {
             <Typography><strong>Username:</strong> {user.username}</Typography>
             <Typography><strong>Email:</strong> {user.email}</Typography>
             <Typography><strong>User ID:</strong> {user.id}</Typography>
+            <Typography><strong>Test:</strong> instrument + store location </Typography>
           </CardContent>
         </Card>
       ) : (
