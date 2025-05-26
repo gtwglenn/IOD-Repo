@@ -52,7 +52,7 @@ export default function AppRouter() {
         />
 
         <Route
-          path="/store-locator"
+          path="/store"
           element={
             <ProtectedRoute>
               <MainLayout>

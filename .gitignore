@@ -2,3 +2,6 @@
 
 *.docx
 *.pdf
+*.zip
+*.env
+*.log

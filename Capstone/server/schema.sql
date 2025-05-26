@@ -20,9 +20,18 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
+    instrument VARCHAR(100),
+    role VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- ADD TO USERS: ROLE + INSTRUMENT FOR MYPROFILE 
+
+-- ALTER TABLE users
+-- ADD COLUMN instrument VARCHAR(100),
+-- ADD COLUMN role VARCHAR(100);
+
 
 -- Add test user
 INSERT IGNORE INTO users (first_name, last_name, username, password, email) VALUES 

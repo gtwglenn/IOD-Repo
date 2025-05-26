@@ -48,7 +48,8 @@ export default function CreateAccount() {
             navigate("/home"); // or your protected page
         } else {
             setMessage("Account created successfully!");
-            setTimeout(() => navigate("/"), 1500); // ⬅️ your actual login route
+            // setTimeout(() => navigate("/"), 1500); // ⬅️ your actual login route
+            setTimeout(() => navigate("/create-profile"), 1500);
         }
         } else {
         setMessage(data.message || "Signup failed.");

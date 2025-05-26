@@ -24,30 +24,104 @@ export default function CreateProfile() {
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (!instrument || !role) {
-      setMessage("Please select both an instrument and a role.");
+  //   if (!instrument || !role) {
+  //     setMessage("Please select both an instrument and a role.");
+  //     return;
+  //   }
+
+  //   console.log("Final profile created:", {
+  //     ...newUser,
+  //     Instrument: instrument,
+  //     Role: role,
+  //   });
+
+  //   setMessage("Profile created successfully!");
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!instrument || !role) {
+  //     setMessage("Please select both an instrument and a role.");
+  //     return;
+  //   }
+
+  //   const completeUser = {
+  //     ...newUser,
+  //     instrument,
+  //     role,
+  //   };
+
+  //   try {
+  //     const response = await fetch("http://localhost:5000/api/update-profile", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`, // if using JWT
+  //       },
+  //       body: JSON.stringify(completeUser),
+  //     });
+
+  //     const result = await response.json();
+
+  //     if (response.ok) {
+  //       setMessage("Profile created successfully!");
+  //       setTimeout(() => {
+  //         // Redirect to home/dashboard after profile creation
+  //         window.location.href = "/home";
+  //       }, 1500);
+  //     } else {
+  //       setMessage(result.message || "Failed to create profile.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error submitting profile:", err);
+  //     setMessage("Server error.");
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const token = localStorage.getItem("token"); // Adjust if you're storing it elsewhere
+
+  try {
+    const response = await fetch("http://localhost:5000/api/update-profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ instrument, role }),
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("Error submitting profile:", text);
+      setMessage(text); // Optional: show error to user
       return;
     }
 
-    console.log("Final profile created:", {
-      ...newUser,
-      Instrument: instrument,
-      Role: role,
-    });
+    const data = await response.json();
+    console.log("Profile update success:", data);
+    setMessage("Profile updated successfully!");
+    // Navigate or refresh user state here if needed
 
-    setMessage("Profile created successfully!");
-  };
+  } catch (error) {
+    console.error("Error submitting profile:", error);
+    setMessage("Something went wrong. Please try again.");
+  }
+};
 
-// user should be directed to home after creating profile 
-// profile is then loaded center screen on home 
-// maybe let them upload a profile picture if I have time 
-// [                    ]
-// [  contact info      ]
-// [  role              ]
-// [  etc.              ]
+
+
+
+
+
+  
+
 
   return (
     <Container maxWidth="sm">
@@ -66,18 +140,7 @@ export default function CreateProfile() {
             Complete Your Profile
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
-            <FormControl fullWidth required margin="normal">
-              <InputLabel>Select Instrument</InputLabel>
-              <Select
-                value={instrument}
-                onChange={(e) => setInstrument(e.target.value)}
-                label="Select Instrument"
-              >
-                <MenuItem value="Instrument1">Instrument1</MenuItem>
-                <MenuItem value="Instrument2">Instrument2</MenuItem>
-                <MenuItem value="Instrument3">Instrument3</MenuItem>
-              </Select>
-            </FormControl>
+            
 
             <FormControl fullWidth required margin="normal">
               <InputLabel>Select Role</InputLabel>
@@ -89,6 +152,19 @@ export default function CreateProfile() {
                 <MenuItem value="Employee">Employee</MenuItem>
                 <MenuItem value="Teacher">Teacher</MenuItem>
                 <MenuItem value="Student">Student</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth required margin="normal">
+              <InputLabel>Select Instrument</InputLabel>
+              <Select
+                value={instrument}
+                onChange={(e) => setInstrument(e.target.value)}
+                label="Select Instrument"
+              >
+                <MenuItem value="Instrument1">Instrument1</MenuItem>
+                <MenuItem value="Instrument2">Instrument2</MenuItem>
+                <MenuItem value="Instrument3">Instrument3</MenuItem>
               </Select>
             </FormControl>
 
@@ -122,3 +198,12 @@ export default function CreateProfile() {
 
 
 // changes for GIT commit 
+
+
+// user should be directed to home after creating profile 
+// profile is then loaded center screen on home 
+// maybe let them upload a profile picture if I have time 
+// [                    ]
+// [  contact info      ]
+// [  role              ]
+// [  etc.              ]
