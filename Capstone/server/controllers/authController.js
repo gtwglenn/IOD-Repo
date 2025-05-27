@@ -15,6 +15,8 @@ exports.signup = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   const username = `${firstName} ${lastName}`.trim();
 
+  console.log("Received signup data", req.body)
+
   try {
     const [existingUsers] = await db.query(
       "SELECT * FROM users WHERE email = ?",

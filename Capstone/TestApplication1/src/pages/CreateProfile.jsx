@@ -1,3 +1,25 @@
+// if time allows: change instrument selection to radio buttons/multiple selections 
+//            --> teachers can teach multiple instruments/students can take lessons for different instruments 
+//                    *(at reserve time/lesson time) *select instrument* 
+
+
+
+// ***for employee/teacher role*** --> set store location
+// ***might actually remove employee role*** --> employee role only purpose is to edit schedules? approve reschedules? 
+//          ^not really necessary for test build of application, because then I'd have to create a change schedule/reschedule system 
+
+
+// ***** STUDENTS DO NOT NEED A STORELOCATION VALUE --> TEACHERS/EMPLOYEES ONLY ***** 
+
+
+// ***** UPDATE: REDIRECT TO MYHOME AFTER SUCCESSFUL ACCOUNT CREATION *****
+
+//  currently redirects to /login, should be easy fix, but account creation process is working 
+
+
+
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -21,6 +43,8 @@ export default function CreateProfile() {
   const [instrument, setInstrument] = useState("");
   const [message, setMessage] = useState("");
 
+  const [storeLocation, setStoreLocation] = useState(""); 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -32,7 +56,7 @@ export default function CreateProfile() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ instrument, role }),
+        body: JSON.stringify({ instrument, role, storeLocation }),
       });
 
       if (!res.ok) {
@@ -92,6 +116,25 @@ export default function CreateProfile() {
                 <MenuItem value="Instrument3">Instrument3</MenuItem>
               </Select>
             </FormControl>
+
+{/* // if time allows: change instrument selection to radio buttons/multiple selections 
+//            --> teachers can teach multiple instruments/students can take lessons for different instruments 
+//                    *(at reserve time/lesson time) *select instrument*  */}
+
+            <FormControl fullWidth required margin="normal">
+              <InputLabel>Select Store Location</InputLabel>
+              <Select
+                value={storeLocation}
+                onChange={(e) => setStoreLocation(e.target.value)}
+                label="Select Store Location"
+              >
+                <MenuItem value="Store001">Store001</MenuItem>
+                <MenuItem value="Store002">Store002</MenuItem>
+                <MenuItem value="Store003">Store003</MenuItem>
+              </Select>
+            </FormControl>
+
+{/* at full build --> have separate CreateAccount for Organizations/Businesses --> prompt for setting up StoreLocations */}
 
             <Button
               fullWidth

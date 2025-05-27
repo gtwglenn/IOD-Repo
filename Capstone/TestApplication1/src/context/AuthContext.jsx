@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (!res.ok) throw new Error("Failed to fetch user");
+      console.log("failed to fetch user");
 
       const data = await res.json();
       setUser(data);

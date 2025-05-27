@@ -5,7 +5,16 @@ export default function MySchedule() {
 }
 
 
+// create UserSchedule as a component --> display on page: <UserSchedule /> 
+
+
+
+
 // somehow get {SelectDate} from SideCalendar / CalSideBar
+
+// function for reserving a time slot 
+// function for (role.teacher) --> set availability 
+//                                  ^tied to storeLocation 
 
 
 
