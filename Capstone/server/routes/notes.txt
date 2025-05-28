@@ -1,0 +1,75 @@
+FROM USERROUTES.JS /API/CREATE-ACCOUNT
+
+router.post("/create-account", async (req, res) => {
+  const { firstName, lastName, email, password, storeLocation } = req.body;
+
+  if (!firstName || !lastName || !email || !password || !storeLocation) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
+
+  const checkSql = `SELECT * FROM users WHERE email = ?`;
+  db.query(checkSql, [email], async (err, results) => {
+    if (err) {
+      console.error("Email check error:", err);
+      return res.status(500).json({ message: "Database error." });
+    }
+
+    if (results.length > 0) {
+      return res.status(409).json({ message: "User with this email already exists." });
+    }
+
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const username = `${firstName} ${lastName}`.trim();
+
+      const insertSql = `
+        INSERT INTO users (first_name, last_name, email, password, username, storeLocation)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `;
+
+      db.query(insertSql, [firstName, lastName, email, hashedPassword, username, storeLocation], (err, result) => {
+        if (err) {
+          console.error("Account creation error:", err);
+          return res.status(500).json({ message: "Failed to create account." });
+        }
+
+        const user = {
+          id: result.insertId,
+          email,
+        };
+
+        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        res.status(201).json({ user, token });
+      });
+    } catch (err) {
+      console.error("Password hashing error:", err);
+      res.status(500).json({ message: "Server error during account creation." });
+    }
+  });
+});
+
+
+/API/UPDATE-PROFILE 
+
+router.post("/update-profile", authenticateToken, (req, res) => {
+  const { instrument, role, storeLocation } = req.body;
+  const userId = req.user.id;
+
+  if (!instrument || !role || !storeLocation) {
+    return res.status(400).json({ message: "Instrument, role, and store location are required." });
+  }
+
+// validation check could be expanded on later build 
+
+  const sql = `UPDATE users SET instrument = ?, role = ?, storeLocation = ? WHERE id = ?`;
+
+  db.query(sql, [instrument, role, storeLocation, userId], (err, results) => {
+    if (err) {
+      console.error("Database update error:", err);
+      return res.status(500).json({ message: "Failed to update profile." });
+    }
+
+    res.json({ message: "Profile updated successfully." });
+  });
+});

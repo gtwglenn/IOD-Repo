@@ -1,53 +1,25 @@
--- **might need to recreate again -> updated_at column
 
 
--- DROP DATABASE IF EXISTS yourdatabase;
--- CREATE DATABASE yourdatabase;
--- USE yourdatabase;
 
 CREATE DATABASE IF NOT EXISTS yourdatabase; 
 USE yourdatabase; 
 
--- CREATE TABLE IF NOT EXISTS users (
---   id INT AUTO_INCREMENT PRIMARY KEY,
---   first_name VARCHAR(50),
---   last_name VARCHAR(50),
---   email VARCHAR(100),
---   password VARCHAR(255),
---   username VARCHAR(100),
---   role VARCHAR(50),
---   instrument VARCHAR(50),
---   store_location VARCHAR(255),  -- ✅ this line
---   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
-
-
--- -- Create the database
--- CREATE DATABASE IF NOT EXISTS yourdatabase;
-
--- -- Use the database
+                                         -- FOR DEBUGGING / REBUILDING DATABASE 
+-- DROP DATABASE IF EXISTS yourdatabase;
+-- CREATE DATABASE yourdatabase;
 -- USE yourdatabase;
-
--- -- Sample data table (optional)
--- CREATE TABLE IF NOT EXISTS your_table (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     name VARCHAR(255)
--- );
-
--- INSERT INTO your_table (name) VALUES ('Example 1'), ('Example 2');
 
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     instrument VARCHAR(100),
     role VARCHAR(100),
-    store_location VARCHAR(100) DEFAULT NULL, 
+    storeLocation VARCHAR(100) DEFAULT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -69,8 +41,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 -- Add test user
-INSERT IGNORE INTO users (first_name, last_name, username, password, email) VALUES 
-('Test', 'User', 'testuser', '$2b$10$eYtkgz1Or1dTJGc1A9z3YuklG3b0kDpoI9nIojg49wPBXrxKmnUJK', 'test@example.com');
+-- INSERT IGNORE INTO users (firstName, lastName, username, password, email) VALUES 
+-- ('Test', 'User', 'testuser', '$2b$10$eYtkgz1Or1dTJGc1A9z3YuklG3b0kDpoI9nIojg49wPBXrxKmnUJK', 'test@example.com');
 
 
 -- // changes for GIT commit 

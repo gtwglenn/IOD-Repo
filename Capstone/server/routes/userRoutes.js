@@ -39,12 +39,15 @@ router.post("/create-account", async (req, res) => {
     }
 
     try {
+
       const hashedPassword = await bcrypt.hash(password, 10);
+
+            // USERNAME CREATED: firstName + lastName 
       const username = `${firstName} ${lastName}`.trim();
 
       // Only inserting the fields we currently have — storeLocation is not part of account creation
       const insertSql = `
-        INSERT INTO users (first_name, last_name, email, password, username)
+        INSERT INTO users (firstName, lastName, email, password, username)
         VALUES (?, ?, ?, ?, ?)
       `;
 
@@ -90,7 +93,7 @@ router.post("/update-profile", authenticateToken, (req, res) => {
     if (!storeLocation) {
       return res.status(400).json({ message: "Store location is required for this role." });
     }
-    sql += `, store_location = ?`;
+    sql += `, storeLocation = ?`;
     params.push(storeLocation);
   }
 
@@ -107,6 +110,25 @@ router.post("/update-profile", authenticateToken, (req, res) => {
   });
 });
 
+
+// GET /api/user-data
+router.get("/user-data", authenticateToken, (req, res) => {
+  const userId = req.user.id;
+
+  const sql = "SELECT * FROM users WHERE id = ?";
+  db.query(sql, [userId], (err, results) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(results[0]); // send user data
+  });
+});
 
 
 module.exports = router;

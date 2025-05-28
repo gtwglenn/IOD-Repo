@@ -30,7 +30,7 @@ exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await db.query(
-      "INSERT INTO users (first_name, last_name, username, password, email) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO users (firstName, lastName, username, password, email) VALUES (?, ?, ?, ?, ?)",
       [firstName, lastName, username, hashedPassword, email]
     );
 
@@ -74,6 +74,9 @@ exports.login = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName, 
+        storeLocation: user.storeLocation
       },
       token,
     });
@@ -83,6 +86,7 @@ exports.login = async (req, res) => {
   }
 };
 
+// could edit //SIGNUP and //LOGIN --> change user properties in schema 
 
 
 // changes for GIT commit 
