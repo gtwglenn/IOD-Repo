@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../db"); // adjust this path as needed
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+//const bcryptjs = require("bcryptjs");
 
 // Middleware to verify JWT token
 function authenticateToken(req, res, next) {
@@ -74,7 +75,6 @@ router.post("/create-account", async (req, res) => {
 });
 
 
-
 // ✅ POST /api/update-profile
 router.post("/update-profile", authenticateToken, (req, res) => {
   const { instrument, role, storeLocation } = req.body;
@@ -111,22 +111,19 @@ router.post("/update-profile", authenticateToken, (req, res) => {
 });
 
 
-// GET /api/user-data
+// help me computer gods, you are my only hope 
+
 router.get("/user-data", authenticateToken, (req, res) => {
+  //const user = req.user.id; 
   const userId = req.user.id;
 
-  const sql = "SELECT * FROM users WHERE id = ?";
-  db.query(sql, [userId], (err, results) => {
-    if (err) {
-      console.error("Database error:", err);
-      return res.status(500).json({ message: "Internal server error" });
+  //db.query("SELECT id, first_name, last_name, email, role, instrument, store_location FROM users WHERE id = ?", [userId], (err, results)
+  db.query("SELECT id, firstName, lastName, email, role, instrument, store_location FROM users WHERE id = ?", [userId], (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(500).json({ message: "User not found" });
     }
 
-    if (results.length === 0) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(results[0]); // send user data
+    res.json(results[0]);
   });
 });
 
@@ -135,6 +132,29 @@ module.exports = router;
 
 
 
+
+//           DELETE THIS LATER 
+
+
+
+// GET /api/user-data
+// router.get("/user-data", authenticateToken, (req, res) => {
+//   const userId = req.user.id;
+
+//   const sql = "SELECT * FROM users WHERE id = ?";
+//   db.query(sql, [userId], (err, results) => {
+//     if (err) {
+//       console.error("Database error:", err);
+//       return res.status(500).json({ message: "Internal server error" });
+//     }
+
+//     if (results.length === 0) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.json(results[0]); // send user data
+//   });
+// });
 
 
 

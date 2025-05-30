@@ -1,51 +1,26 @@
-import { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+// /components/Calendar.jsx
+import { useState, useEffect } from "react";
 
-import './Sample.css';
+export default function Calendar({ selectedDate, onDateChange }) {
+  const [localDate, setLocalDate] = useState(selectedDate || new Date());
 
-export default function MyCalendar() {
-  const [value, setValue] = useState(new Date());
-  console.log(value);
-  //console.log(setValue); 
-  //const selectDate = value; 
-  const longDate = value.toString(); 
-  let selectDate = longDate.slice(0, -41); 
-  console.log(selectDate); 
+  useEffect(() => {
+    onDateChange(localDate);
+  }, [localDate]);
 
-  // going further, use 'selectDate' to pull LocalSchedule from database (will have to organize: ddd/mmm/yyyy)
-
-  //document.getElementById("testMessage").textContent = "The date you selected is: " + selectDate; 
+  const handleChange = (e) => {
+    setLocalDate(new Date(e.target.value));
+  };
 
   return (
-    <div className="Sample">
-      <header>
-        <h1>react-calendar sample page</h1>
-      </header>
-      <div className="Sample__container">
-        <main className="Sample__container__content">
-          <Calendar onChange={setValue} showWeekNumbers value={value} />
-        </main>
-      </div>
-      <br></br>
-      <div>
-        <h2>test</h2>
-        <p>The date you selected is: {selectDate}</p>
-      </div>
-      <br></br>
-      <div>
-        
-        <div id="LocalSchedule">
-          <h3>Schedule for {selectDate}</h3>
-          <p>___________________________</p>
-        </div>
-        
-      </div>
-
+    <div>
+      <label htmlFor="calendarInput"><strong>Select Date: </strong></label>
+      <input
+        id="calendarInput"
+        type="date"
+        value={localDate.toISOString().split("T")[0]}
+        onChange={handleChange}
+      />
     </div>
   );
 }
-
-
-
-// changes for GIT commit 

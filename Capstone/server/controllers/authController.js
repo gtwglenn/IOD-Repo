@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql2/promise");
 
-// DB pool
+// database pool 
 const db = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
@@ -44,9 +44,11 @@ exports.signup = async (req, res) => {
 // LOGIN
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+  //const { user.id, email } = req.body;  
 
   try {
     const [results] = await db.query(
+      // "SELECT * FROM users WHERE id = ?",
       "SELECT * FROM users WHERE email = ?",
       [email]
     );

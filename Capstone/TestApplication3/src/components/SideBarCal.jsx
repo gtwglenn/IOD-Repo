@@ -4,6 +4,9 @@ import SideCalendar from './SideCalendar.jsx';
 import { useContext } from "react"; 
 import { AuthContext } from "../context/AuthContext.jsx";
 
+import './Sample.css';
+
+
 const navItems = [
   { label: "MyHome", path: "/home" },
   { label: "MySchedule", path: "/schedule" },

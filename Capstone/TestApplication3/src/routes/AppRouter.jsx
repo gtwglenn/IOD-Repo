@@ -35,9 +35,9 @@ export default function AppRouter() {
           path="/schedule"
           element={
             <ProtectedRoute>
-              <SecondaryLayout>
+              <MainLayout>
                 <MySchedule />
-              </SecondaryLayout>
+              </MainLayout>
             </ProtectedRoute>
           }
         />

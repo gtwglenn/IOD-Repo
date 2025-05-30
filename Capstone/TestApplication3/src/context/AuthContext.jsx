@@ -1,121 +1,85 @@
 import { createContext, useState, useEffect, useContext } from "react";
 
-// function normalizeUser(userFromBackend) {
-//   return {
-//     id: userFromBackend.id,
-//     firstName: userFromBackend.first_name,
-//     lastName: userFromBackend.last_name,
-//     email: userFromBackend.email,
-//     storeLocation: userFromBackend.store_location,
-//     role: userFromBackend.role,
-//     instrument: userFromBackend.instrument,
-//     // Add others as needed
-//   };
-// }
-
+// 🧼 Normalize backend user shape into frontend format
+function normalizeUser(userFromBackend) {
+  return {
+    id: userFromBackend.id,
+    firstName: userFromBackend.first_name,
+    lastName: userFromBackend.last_name,
+    email: userFromBackend.email,
+    storeLocation: userFromBackend.store_location,
+    role: userFromBackend.role,
+    instrument: userFromBackend.instrument,
+  };
+}
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true); // New
-  const [error, setError] = useState(null);     // New
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Load user/token from localStorage on app start
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
-
-    if (storedToken) {
-      setToken(storedToken);
-      fetchUser(storedToken); // Fetch user data from backend
-    } else {
-      setLoading(false); // Done loading even if no token
+  // ✅ Hoist fetchUser above useEffect so it's defined when called
+  const fetchUser = async (authToken) => {
+    const resolvedToken = authToken || token;
+    if (!resolvedToken) {
+      setLoading(false);
+      return;
     }
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Optional: preload basic info
-    }
-  }, []);
-
-//   const fetchUser = async (authToken = token) => {
-//   setLoading(true);
-//   setError(null);
-
-//   try {
-//     console.log("🔁 Attempting fetch to /api/user-data");
-//     console.log("🧠 Token being sent:", authToken);
-
-//     const res = await fetch("http://localhost:5000/api/user-data", {
-//       headers: {
-//         Authorization: `Bearer ${authToken}`,
-//       },
-//     });
-
-//     if (!res.ok) {
-//       console.error(`❌ Failed to fetch user: Status ${res.status}`);
-//       const text = await res.text();
-//       console.error("🔍 Response body:", text);
-//       throw new Error("Failed to fetch user");
-//     }
-
-//     const data = await res.json();
-//     console.log("✅ User fetched:", data);
-
-//     // later build --> find a better way to do this, do not need to pull all user-data, especially not credentials like password 
-
-//     const normalized = normalizeUser(data);
-//     setUser(normalized);
-//     localStorage.setItem("user", JSON.stringify(normalized));
-//   } catch (err) {
-//     console.error("⚠️ fetchUser error:", err);
-//     setError(err.message || "Unknown error");
-//     setUser(null);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
-
-const fetchUser = async (authToken = token) => {
     setLoading(true);
     setError(null);
 
     try {
       const res = await fetch("http://localhost:5000/api/user-data", {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${resolvedToken}`,
         },
       });
 
       if (!res.ok) throw new Error("Failed to fetch user");
-      console.log("failed to fetch user");
 
       const data = await res.json();
-      setUser(data);
-      localStorage.setItem("user", JSON.stringify(data));
+      const normalized = normalizeUser(data);
+      setUser(normalized);
+      localStorage.setItem("user", JSON.stringify(normalized));
     } catch (err) {
       console.error("User fetch error:", err);
       setError(err.message || "Unknown error");
       setUser(null);
+      localStorage.removeItem("token");
     } finally {
       setLoading(false);
     }
   };
 
+  // 🚀 On first load, restore token and user from localStorage
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
 
+    if (storedToken) {
+      setToken(storedToken);
+      fetchUser(storedToken); // ✅ Now safe to call
+    } else {
+      setLoading(false);
+    }
 
-
-
-
-
-
-
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser) setUser(storedUser);
+    } catch (err) {
+      console.warn("⚠️ Corrupt user in localStorage", err);
+      localStorage.removeItem("user");
+    }
+  }, []);
 
   const login = (userData, authToken) => {
-    setUser(userData);
+    const normalized = normalizeUser(userData);
+    setUser(normalized);
     setToken(authToken);
-    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("user", JSON.stringify(normalized));
     localStorage.setItem("token", authToken);
   };
 
@@ -133,7 +97,7 @@ const fetchUser = async (authToken = token) => {
         token,
         login,
         logout,
-        fetchUser, // allow re-fetching profile
+        fetchUser,
         loading,
         error,
         isAuthenticated: !!user,
@@ -144,5 +108,5 @@ const fetchUser = async (authToken = token) => {
   );
 };
 
-// Custom hook for easier access
+// 🪄 Optional custom hook so you don't have to manually useContext(AuthContext)
 export const useAuth = () => useContext(AuthContext);

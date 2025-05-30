@@ -17,6 +17,7 @@
     "@mui/material": "^7.1.0",
     "@mui/x-date-pickers": "^8.4.0",
     "@vitejs/plugin-react": "^4.4.1",
+    "date-fns": "^4.1.0",
     "react": "^19.1.0",
     "react-calendar": "^5.1.0",
     "react-dom": "^19.1.0",

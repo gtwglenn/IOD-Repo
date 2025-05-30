@@ -1,6 +1,7 @@
 const mysql = require("mysql2");
 require("dotenv").config();
 
+// establish 'db' as MySQL connection --> pulled from .env 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -10,10 +11,10 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ Database connection failed:", err);
-    process.exit(1); // stop server if DB doesn't connect
+    console.error("!ERROR! Database connection failed:", err);
+    process.exit(1);                                                // stop server if database doesn't connect
   }
-  console.log("✅ Connected to MySQL database.");
+  console.log("!SUCCESS! Connected to MySQL database.");
 });
 
 module.exports = db;
