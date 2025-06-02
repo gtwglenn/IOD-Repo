@@ -1,0 +1,65 @@
+
+/* update: 
+
+    - a tag --> visited 
+    - background 
+    - do some fancy stuff 
+*/ 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+#navPanel {
+
+  display: flex; 
+  justify-content: center;
+
+
+  height: 10vh; 
+  width: 100vw; 
+
+
+}
+
+
+#UPDATE_CSS {
+
+  text-align: center; 
+  font-size: 24pt; 
+
+  /* I didn't use a tags for links me no likey  */
+
+}
+
+#pp {
+
+  display: flex; 
+  justify-content: space-around;
+
+
+}
+
+
+
+
+
+/* B-B-B-BONUS SECTION
+
+        // #d0e8e4
+        // #D0E8E4
+
+        // #313131
+
+        // #4288BF
+
+        // #C6E6E0 */
+
+
+
+        /* background: darkMode ? '#313131' : '#C6E6E0', 
+        color: darkMode ? '#4288BF' : '#007000', */
