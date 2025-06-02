@@ -1,10 +1,10 @@
--- -- 💣 RESET DATABASE
--- DROP DATABASE IF EXISTS yourdatabase;
--- CREATE DATABASE yourdatabase;
--- USE yourdatabase;
-
-CREATE DATABASE IF NOT EXISTS yourdatabase; 
+-- 💣 RESET DATABASE
+DROP DATABASE IF EXISTS yourdatabase;
+CREATE DATABASE yourdatabase;
 USE yourdatabase;
+
+-- CREATE DATABASE IF NOT EXISTS yourdatabase; 
+-- USE yourdatabase;
 
 -- 🏬 STORES TABLE
 CREATE TABLE IF NOT EXISTS stores (
@@ -86,18 +86,30 @@ INSERT IGNORE INTO instruments (name) VALUES
 
 -- 👩‍🏫 SEED TEACHERS
 -- Assumes stores auto-incremented as 1, 2, 3
-INSERT INTO teachers (firstName, lastName, username, store_id, store_code, instrument) VALUES
+INSERT IGNORE INTO teachers (firstName, lastName, username, store_id, store_code, instrument) VALUES
 ('John', 'Doe', 'jdoe', 1, 'Store001', 'Piano'),
 ('Jane', 'Smith', 'jsmith', 1, 'Store001', 'Guitar'),
 ('Tom', 'Brown', 'tbrown', 1, 'Store001', 'Drums'),
-('Ludwig', 'Beethoven', 'lbeeth', 1, 'Store001', 'Piano'),
+('Ludwig', 'Beethoven', 'lbeeth', 2, 'Store002', 'Piano'),
 ('Eric', 'Clapton', 'eclapton', 2, 'Store002', 'Guitar'),
-('Paul', 'McCartney', 'pmccartney', 3, 'Store003', 'Guitar');
+('Paul', 'McCartney', 'pmccartney', 2, 'Store002', 'Guitar'),
+('Thom', 'Yorke', 'thomyorke', 3, 'Store003', 'Piano'),
+('John', 'Frusciante', 'johnboyf', 3, 'Store003', 'Guitar'),
+('Keith', 'Moon', 'keithmoon', 3, 'Store003', 'Drums');
 
 -- 🔗 LINK TEACHERS TO INSTRUMENTS
 -- Match IDs from `SELECT * FROM teachers;` if needed
 INSERT IGNORE INTO teacher_instruments (teacher_id, instrument_id) VALUES
-(4, 1),  -- Beethoven → Piano
-(5, 2),  -- Clapton → Guitar
-(6, 2),  -- McCartney → Guitar
-(6, 1);  -- McCartney → Piano
+(1, 1),  -- John Doe → Piano
+(2, 2),  -- Jane Smith → Guitar
+(3, 3),  -- Tom Brown → Drums
+(4, 1),  -- Ludwig Beethoven → Piano
+(5, 2),  -- Eric Clapton → Guitar
+(6, 2),  -- Paul McCartney → Guitar
+(6, 1),  -- Paul McCartney → Piano (optional dual)
+(7, 1),  -- Thom Yorke → Piano
+(8, 2),  -- John Frusciante → Guitar
+(9, 3);  -- Keith Moon → Drums
+
+
+ALTER TABLE teachers ADD COLUMN IF NOT EXISTS instrument_id INT DEFAULT NULL;

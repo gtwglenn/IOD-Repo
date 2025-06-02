@@ -1,20 +1,38 @@
 import { useState } from "react";
-import Calendar from "../components/Calendar"; // adjust path as needed
+import Calendar from "../components/Calendar";
 import ScheduleView from "../components/ScheduleView";
 
-export default function SchedulePage() {
+export default function MySchedule() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedStoreId, setSelectedStoreId] = useState("");
 
+  const [committedDate, setCommittedDate] = useState(null);
+  const [committedStoreId, setCommittedStoreId] = useState(null);
+
   const handleStoreChange = (e) => {
     setSelectedStoreId(e.target.value);
+    // do NOT reset committed values
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    // do NOT reset committed values
+  };
+
+  const handleSubmit = () => {
+    if (selectedStoreId && selectedDate) {
+      setCommittedStoreId(selectedStoreId);
+      setCommittedDate(selectedDate);
+    } else {
+      alert("Please select both a store and a date.");
+    }
   };
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>🎼 Lesson Scheduler</h2>
+      <h2>|Logo| Lesson Scheduler</h2>
 
-      {/* Store Selector */}
+      {/* Header: Store + Date Selectors */}
       <div style={{ marginBottom: "1rem" }}>
         <label htmlFor="storeSelect"><strong>Select Store: </strong></label>
         <select id="storeSelect" value={selectedStoreId} onChange={handleStoreChange}>
@@ -25,71 +43,21 @@ export default function SchedulePage() {
         </select>
       </div>
 
-      {/* Calendar Picker */}
       <div style={{ marginBottom: "1rem" }}>
-        <Calendar selectedDate={selectedDate} onDateChange={setSelectedDate} />
+        <Calendar selectedDate={selectedDate} onDateChange={handleDateChange} />
       </div>
 
-      {/* Schedule Grid */}
-      <ScheduleView selectedDate={selectedDate} selectedStoreId={selectedStoreId} />
+      <div style={{ marginBottom: "1.5rem" }}>
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
+
+      {/* View uses committed selections only */}
+      {committedStoreId && committedDate && (
+        <ScheduleView
+          selectedDate={committedDate}
+          selectedStoreId={committedStoreId}
+        />
+      )}
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Typography } from "@mui/material";
-// import  ScheduleView  from "../components/ScheduleView"; 
-
-// export default function MySchedule() {
-//   return <Typography variant="h4">Welcome to My Schedule!<br></br><p>Pull Schedule for: 'SelectDate'</p><br></br><ScheduleView /></Typography>;
-// }
-
-
-// // create UserSchedule as a component --> display on page: <UserSchedule /> 
-
-
-
-
-// // somehow get {SelectDate} from SideCalendar / CalSideBar
-
-// // function for reserving a time slot 
-// // function for (role.teacher) --> set availability 
-// //                                  ^tied to storeLocation 
-
-
-
-// // changes for GIT commit 

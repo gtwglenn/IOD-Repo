@@ -20,38 +20,80 @@ export default function CreateAccount() {
   const navigate = useNavigate();
   const { login } = useAuth(); // 👈 Get login from context
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    const newUser = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:5000/api/create-account", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.token) {
-        login(data.user, data.token); // 👈 Store token + user in context + localStorage
-        navigate("/create-profile"); // ✅ You can now update profile with JWT
-      } else {
-        setMessage(data.message || "Signup failed.");
-      }
-    } catch (err) {
-      console.error("Error signing up:", err);
-      setMessage("Server error.");
-    }
+  const newUser = {
+    firstName,
+    lastName,
+    email,
+    password,
   };
+
+  try {
+    const response = await fetch("http://localhost:5000/api/create-account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+
+    const data = await response.json();
+    console.log("✅ Response received from backend:", data);
+
+    if (response.ok && data.token) {
+      console.log("🔐 Token exists, logging in user");
+      login(data.user, data.token);
+      navigate("/create-profile");
+    } else if (response.ok) {
+      console.log("⚠️ Response OK but no token, showing message");
+      setMessage("Account created but login token missing.");
+      setTimeout(() => navigate("/login"), 2000); // optional fallback
+    } else {
+      console.log("❌ Response not OK:", data.message);
+      setMessage(data.message || "Signup failed.");
+    }
+  } catch (err) {
+    console.error("🔥 Error signing up:", err);
+    setMessage("Server error.");
+  }
+};
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const newUser = {
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     password,
+  //   };
+
+  //   try {
+  //     const response = await fetch("http://localhost:5000/api/create-account", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(newUser),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (response.ok && data.token) {
+  //       login(data.user, data.token); // 👈 Store token + user in context + localStorage
+  //       navigate("/create-profile"); // ✅ You can now update profile with JWT
+  //     } else {
+  //       setMessage(data.message || "Signup failed.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error signing up:", err);
+  //     setMessage("Server error.");
+  //   }
+  // };
 
 
 //   if (response.ok) {

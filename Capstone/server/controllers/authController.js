@@ -42,51 +42,91 @@ exports.signup = async (req, res) => {
 };
 
 // LOGIN
+// exports.login = async (req, res) => {
+//   const { email, password } = req.body;
+//   //const { user.id, email } = req.body;  
+
+//   try {
+//     const [results] = await db.query(
+//       // "SELECT * FROM users WHERE id = ?",
+//       "SELECT * FROM users WHERE email = ?",
+//       [email]
+//     );
+
+//     if (results.length === 0) {
+//       return res.status(401).json({ message: "Invalid email or password" });
+//     }
+
+//     const user = results[0];
+//     const isMatch = await bcrypt.compare(password, user.password);
+
+//     if (!isMatch) {
+//       return res.status(401).json({ message: "Invalid email or password" });
+//     }
+
+//     const token = jwt.sign(
+//       { id: user.id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "1h" }
+//     );
+
+//     res.json({
+//       success: true,
+//       user: {
+//         id: user.id,
+//         username: user.username,
+//         email: user.email,
+//         firstName: user.firstName,
+//         lastName: user.lastName, 
+//         storeLocation: user.storeLocation
+//       },
+//       token,
+//     });
+//   } catch (err) {
+//     console.error("Login error:", err);
+//     res.status(500).json({ message: "Server error", error: err.message });
+//   }
+// };
+
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  //const { user.id, email } = req.body;  
+  console.log("🔐 Login attempt:", email);
 
   try {
     const [results] = await db.query(
-      // "SELECT * FROM users WHERE id = ?",
       "SELECT * FROM users WHERE email = ?",
       [email]
     );
 
+    console.log("👤 DB user results:", results);
+
     if (results.length === 0) {
+      console.log("❌ No user found with that email");
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const user = results[0];
+    console.log("🔍 Checking password:", password, "vs", user.password);
+
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("✅ Password match result:", isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.json({
-      success: true,
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName, 
-        storeLocation: user.storeLocation
-      },
-      token,
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
     });
+
+    res.json({ token, user });
   } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("🔥 Login error:", err);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 // could edit //SIGNUP and //LOGIN --> change user properties in schema 
 

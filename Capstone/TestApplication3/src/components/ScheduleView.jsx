@@ -1,79 +1,94 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useEffect, useState } from "react";
 
 export default function ScheduleView({ selectedDate, selectedStoreId }) {
-  const { user } = useContext(AuthContext);
   const [teachers, setTeachers] = useState([]);
   const [lessons, setLessons] = useState([]);
 
   const currentDate = selectedDate || new Date();
+  const dateStr = currentDate.toLocaleDateString("en-CA"); // YYYY-MM-DD
 
-  const timeslots = Array.from({ length: 16 }, (_, i) => {
-    const hour = 9 + Math.floor(i / 2);
-    const minute = i % 2 === 0 ? "00" : "30";
-    return `${hour.toString().padStart(2, "0")}:${minute}`;
-  });
+  const timeslots = [
+    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+    "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+    "15:00", "15:30", "16:00", "16:30"
+  ];
 
   useEffect(() => {
     if (!selectedStoreId) return;
 
-    fetch(`/api/teachers?storeId=${selectedStoreId}`)
+    fetch(`http://localhost:5000/api/teachers?storeId=${selectedStoreId}`)
       .then(res => res.json())
-      .then(data => setTeachers(data))
-      .catch(err => console.error("Failed to fetch teachers", err));
+      .then(data => {
+        console.log("🧑‍🏫 Teachers loaded:", data);
+        setTeachers(data);
+      })
+      .catch(err => console.error("Teacher fetch error:", err));
   }, [selectedStoreId]);
 
   useEffect(() => {
-    if (!selectedStoreId || !currentDate) return;
+    if (!selectedStoreId || !selectedDate) return;
 
-    const dateStr = currentDate.toISOString().split("T")[0];
-
-    fetch(`/api/lessons?storeId=${selectedStoreId}&date=${dateStr}`)
+    fetch(`http://localhost:5000/api/lessons?storeId=${selectedStoreId}&date=${dateStr}`)
       .then(res => res.json())
-      .then(data => setLessons(data))
-      .catch(err => console.error("Failed to fetch lessons", err));
-  }, [selectedStoreId, currentDate]);
+      .then(data => {
+        console.log("📚 Lessons loaded:", data);
+        setLessons(data);
+      })
+      .catch(err => console.error("Lesson fetch error:", err));
+  }, [selectedStoreId, selectedDate]);
+
+  const getLessonForSlot = (teacherId, time) => {
+    return lessons.find(
+      lesson =>
+        lesson.teacher_id === teacherId &&
+        lesson.start_time.startsWith(time)
+    );
+  };
 
   return (
     <div style={{ padding: "1rem" }}>
-      <h3>
-        📍 Store: {selectedStoreId ? `#${selectedStoreId}` : "—"} | 📅 Date:{" "}
-        {currentDate.toLocaleDateString()}
-      </h3>
+      <h3>📍 Store #{selectedStoreId} | 📅 {dateStr}</h3>
 
-      {selectedStoreId ? (
-        <table border="1" cellPadding="8" cellSpacing="0" style={{ marginTop: "1rem", width: "100%" }}>
-          <thead>
-            <tr>
-              <th>Time</th>
-              {teachers.map(t => (
-                <th key={t.id}>{t.firstName} {t.lastName}</th>
-              ))}
-              <th>+</th>
+      <table border="1" cellPadding="10" cellSpacing="0" style={{ width: "100%", textAlign: "center" }}>
+        <thead>
+          <tr>
+            <th>Time</th>
+            {teachers.length > 0 ? (
+              teachers.map((teacher) => (
+                <th key={teacher.id}>
+                  {teacher.firstName} {teacher.lastName}
+                </th>
+              ))
+            ) : (
+              <>
+                <th>Teacher1</th>
+                <th>Teacher2</th>
+                <th>Teacher3</th>
+              </>
+            )}
+            <th>+</th>
+          </tr>
+        </thead>
+        <tbody>
+          {timeslots.map((time) => (
+            <tr key={time}>
+              <td>{time}</td>
+
+              {(teachers.length > 0 ? teachers : [1, 2, 3]).map((t, index) => {
+                const teacherId = t.id || index + 1;
+                const lesson = getLessonForSlot(teacherId, time);
+                return (
+                  <td key={`${teacherId}-${time}`}>
+                    {lesson ? lesson.status : ""}
+                  </td>
+                );
+              })}
+
+              <td>…</td>
             </tr>
-          </thead>
-          <tbody>
-            {timeslots.map(time => (
-              <tr key={time}>
-                <td>{time}</td>
-                {teachers.map(teacher => {
-                  const lesson = lessons.find(
-                    l => l.teacher_id === teacher.id && l.start_time.startsWith(time)
-                  );
-                  return (
-                    <td key={`${teacher.id}-${time}`} style={{ backgroundColor: lesson ? "#dff0d8" : "#fff" }}>
-                      {lesson ? lesson.instrument_name : ""}
-                    </td>
-                  );
-                })}
-                <td>⋯</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>🛈 Please select a store to view schedule.</p>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
