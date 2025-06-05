@@ -1,25 +1,3 @@
-// if time allows: change instrument selection to radio buttons/multiple selections 
-//            --> teachers can teach multiple instruments/students can take lessons for different instruments 
-//                    *(at reserve time/lesson time) *select instrument* 
-
-
-
-// ***for employee/teacher role*** --> set store location
-// ***might actually remove employee role*** --> employee role only purpose is to edit schedules? approve reschedules? 
-//          ^not really necessary for test build of application, because then I'd have to create a change schedule/reschedule system 
-
-
-// ***** STUDENTS DO NOT NEED A STORELOCATION VALUE --> TEACHERS/EMPLOYEES ONLY ***** 
-
-
-// ***** UPDATE: REDIRECT TO MYHOME AFTER SUCCESSFUL ACCOUNT CREATION *****
-
-//  currently redirects to /login, should be easy fix, but account creation process is working 
-
-
-
-
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -41,9 +19,8 @@ export default function CreateProfile() {
 
   const [role, setRole] = useState("");
   const [instrument, setInstrument] = useState("");
+  const [storeLocation, setStoreLocation] = useState("");
   const [message, setMessage] = useState("");
-
-  const [storeLocation, setStoreLocation] = useState(""); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,16 +36,32 @@ export default function CreateProfile() {
         body: JSON.stringify({ instrument, role, storeLocation }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || "Profile update failed");
+        throw new Error(data.message || "Profile update failed");
       }
 
-      await fetchUser(); // Refresh user context
-      setMessage("Profile updated successfully!");
-      navigate("/home");
+      console.log("✅ Profile updated:", data);
+
+      // Optional: if backend returns a new token after profile update
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        console.log("Updated token saved to localStorage");
+      }
+
+      try {
+        await fetchUser();
+        console.log(" User context successfully refreshed");
+        navigate("/home");
+      } catch (err) {
+        console.error("Error refreshing user context:", err);
+        setMessage("Profile updated, but we couldn't refresh user data. Try logging in again.");
+        // Optional fallback:
+        // navigate("/home");
+      }
     } catch (err) {
-      console.error("Profile error:", err);
+      console.error("Profile update error:", err);
       setMessage(err.message || "Something went wrong.");
     }
   };
@@ -117,10 +110,6 @@ export default function CreateProfile() {
               </Select>
             </FormControl>
 
-{/* // if time allows: change instrument selection to radio buttons/multiple selections 
-//            --> teachers can teach multiple instruments/students can take lessons for different instruments 
-//                    *(at reserve time/lesson time) *select instrument*  */}
-
             <FormControl fullWidth required margin="normal">
               <InputLabel>Select Store Location</InputLabel>
               <Select
@@ -133,8 +122,6 @@ export default function CreateProfile() {
                 <MenuItem value="Store003">Store003</MenuItem>
               </Select>
             </FormControl>
-
-{/* at full build --> have separate CreateAccount for Organizations/Businesses --> prompt for setting up StoreLocations */}
 
             <Button
               fullWidth

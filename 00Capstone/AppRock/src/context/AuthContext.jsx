@@ -58,8 +58,8 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error("User fetch error:", err);
       setError(err.message || "Unknown error");
-      setUser(null);
-      localStorage.removeItem("token");
+      // setUser(null);
+      // localStorage.removeItem("token");                                    // removed --> preventing auto-login after account creation 
     } finally {
       setLoading(false);
     }
