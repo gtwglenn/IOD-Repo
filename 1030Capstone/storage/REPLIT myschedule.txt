@@ -1,0 +1,377 @@
+import React, { useState, useEffect } from 'react';
+import './MySchedule.css';
+
+const MySchedule = () => {
+  const [selectedStore, setSelectedStore] = useState('Store001');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [stores, setStores] = useState([]);
+  const [teachers, setTeachers] = useState([]);
+  const [instruments, setInstruments] = useState([]);
+  const [scheduleBlocks, setScheduleBlocks] = useState([]);
+  const [showAfternoon, setShowAfternoon] = useState(false);
+
+  // Initialize data
+  useEffect(() => {
+    // Default stores
+    const defaultStores = [
+      { id: 1, name: 'Store001' },
+      { id: 2, name: 'Store002' },
+      { id: 3, name: 'Store003' }
+    ];
+    setStores(defaultStores);
+
+    // Default instruments with colors
+    const defaultInstruments = [
+      { id: 1, name: 'Piano', color: '#EF4444' },
+      { id: 2, name: 'Guitar', color: '#10B981' },
+      { id: 3, name: 'Violin', color: '#3B82F6' },
+      { id: 4, name: 'Drums', color: '#F59E0B' },
+      { id: 5, name: 'Voice', color: '#8B5CF6' }
+    ];
+    setInstruments(defaultInstruments);
+
+    // Default teachers
+    const defaultTeachers = [
+      { 
+        id: 1, 
+        name: 'Teacher1', 
+        storeLocation: 'Store001',
+        instruments: ['Piano', 'Guitar', 'Violin']
+      },
+      { 
+        id: 2, 
+        name: 'Teacher2', 
+        storeLocation: 'Store001',
+        instruments: ['Guitar', 'Drums']
+      },
+      { 
+        id: 3, 
+        name: 'Teacher3', 
+        storeLocation: 'Store001',
+        instruments: ['Piano', 'Violin']
+      }
+    ];
+    setTeachers(defaultTeachers);
+    setSelectedTeacher(defaultTeachers[0]);
+  }, []);
+
+  // Generate time slots
+  const generateTimeSlots = () => {
+    const slots = [];
+    const endHour = showAfternoon ? 17 : 13;
+    
+    for (let hour = 9; hour < endHour; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        const displayTime = hour < 12 
+          ? `${hour}:${minute.toString().padStart(2, '0')} AM`
+          : hour === 12
+          ? `${hour}:${minute.toString().padStart(2, '0')} PM`
+          : `${hour - 12}:${minute.toString().padStart(2, '0')} PM`;
+        
+        slots.push({ timeString, displayTime });
+      }
+    }
+    
+    return slots;
+  };
+
+  // Get schedule block for a time slot
+  const getScheduleBlock = (timeString) => {
+    return scheduleBlocks.find(block => 
+      block.startTime === timeString && 
+      block.teacherId === selectedTeacher?.id &&
+      block.date === formatDate(selectedDate)
+    );
+  };
+
+  // Toggle slot status
+  const toggleSlotStatus = (timeString) => {
+    const dateString = formatDate(selectedDate);
+    const existingBlock = getScheduleBlock(timeString);
+    
+    if (!existingBlock) {
+      // Create new block with 'open' status
+      const newBlock = {
+        id: Date.now(),
+        teacherId: selectedTeacher.id,
+        storeLocation: selectedStore,
+        date: dateString,
+        startTime: timeString,
+        endTime: getEndTime(timeString),
+        status: 'open'
+      };
+      setScheduleBlocks([...scheduleBlocks, newBlock]);
+    } else {
+      // Cycle through statuses: open -> closed -> booked -> tentative -> open
+      let newStatus = 'open';
+      switch (existingBlock.status) {
+        case 'open':
+          newStatus = 'closed';
+          break;
+        case 'closed':
+          newStatus = 'booked';
+          break;
+        case 'booked':
+          newStatus = 'tentative';
+          break;
+        case 'tentative':
+          newStatus = 'open';
+          break;
+      }
+      
+      setScheduleBlocks(scheduleBlocks.map(block =>
+        block.id === existingBlock.id 
+          ? { ...block, status: newStatus }
+          : block
+      ));
+    }
+  };
+
+  // Helper functions
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0];
+  };
+
+  const getEndTime = (startTime) => {
+    const [hour, minute] = startTime.split(':').map(Number);
+    const endMinute = minute === 30 ? 0 : 30;
+    const endHour = minute === 30 ? hour + 1 : hour;
+    return `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
+  };
+
+  const getInstrumentColor = (instrumentName) => {
+    const instrument = instruments.find(inst => inst.name === instrumentName);
+    return instrument?.color || '#6B7280';
+  };
+
+  const getBlockStyle = (status) => {
+    switch (status) {
+      case 'open':
+        return 'status-open';
+      case 'closed':
+        return 'status-closed';
+      case 'booked':
+        return 'status-booked';
+      case 'tentative':
+        return 'status-tentative';
+      default:
+        return 'status-default';
+    }
+  };
+
+  const getBlockText = (block) => {
+    if (!block) return 'Available';
+    
+    switch (block.status) {
+      case 'open':
+        return 'Available';
+      case 'closed':
+        return 'Unavailable';
+      case 'booked':
+        return block.lessonType ? `${block.lessonType} Lesson` : 'Booked';
+      case 'tentative':
+        return `${block.lessonType || 'Lesson'} - Pending`;
+      default:
+        return 'Available';
+    }
+  };
+
+  const timeSlots = generateTimeSlots();
+  const filteredTeachers = teachers.filter(teacher => teacher.storeLocation === selectedStore);
+
+  return (
+    <div className="schedule-container">
+      {/* Header */}
+      <div className="schedule-header">
+        <div className="header-left">
+          <h1>MySchedule</h1>
+          <div className="store-selector">
+            <label>STORE#</label>
+            <select 
+              value={selectedStore} 
+              onChange={(e) => setSelectedStore(e.target.value)}
+            >
+              {stores.map(store => (
+                <option key={store.id} value={store.name}>
+                  {store.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        
+        <div className="header-right">
+          <div className="date-selector">
+            <label>DATE:</label>
+            <input
+              type="date"
+              value={formatDate(selectedDate)}
+              onChange={(e) => setSelectedDate(new Date(e.target.value))}
+            />
+          </div>
+          
+          <div className="date-navigation">
+            <button onClick={() => setSelectedDate(new Date(selectedDate.getTime() - 7 * 24 * 60 * 60 * 1000))}>
+              &lt;&lt;
+            </button>
+            <button onClick={() => setSelectedDate(new Date(selectedDate.getTime() - 24 * 60 * 60 * 1000))}>
+              &lt;
+            </button>
+            <span>|</span>
+            <button onClick={() => setSelectedDate(new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000))}>
+              &gt;
+            </button>
+            <button onClick={() => setSelectedDate(new Date(selectedDate.getTime() + 7 * 24 * 60 * 60 * 1000))}>
+              &gt;&gt;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Teacher Tabs */}
+      <div className="teacher-tabs">
+        <div className="teacher-list">
+          {filteredTeachers.map(teacher => (
+            <div 
+              key={teacher.id} 
+              className={`teacher-tab ${selectedTeacher?.id === teacher.id ? 'active' : ''}`}
+              onClick={() => setSelectedTeacher(teacher)}
+            >
+              <span className="teacher-name">{teacher.name}</span>
+              <div className="instrument-indicators">
+                {teacher.instruments.map(instrumentName => (
+                  <div
+                    key={instrumentName}
+                    className="instrument-dot"
+                    style={{ backgroundColor: getInstrumentColor(instrumentName) }}
+                    title={instrumentName}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+          <button className="add-teacher-btn">+ Add Teacher</button>
+        </div>
+        
+        {/* Instrument Legend */}
+        <div className="instrument-legend">
+          {instruments.map(instrument => (
+            <div key={instrument.id} className="legend-item">
+              <div
+                className="legend-dot"
+                style={{ backgroundColor: instrument.color }}
+              />
+              <span>{instrument.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="schedule-main">
+        {/* Schedule Grid */}
+        <div className="schedule-grid">
+          {selectedTeacher && (
+            <>
+              <h3>{selectedTeacher.name} Schedule</h3>
+              <p>{selectedDate.toDateString()}</p>
+              
+              <div className="time-grid">
+                <div className="time-column">
+                  <div className="time-header">TIME</div>
+                  {timeSlots.map(({ timeString, displayTime }) => (
+                    <div key={timeString} className="time-slot">
+                      {displayTime}
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="schedule-column">
+                  <div className="schedule-header">AVAILABILITY</div>
+                  {timeSlots.map(({ timeString }) => {
+                    const block = getScheduleBlock(timeString);
+                    const status = block?.status || 'open';
+                    
+                    return (
+                      <button
+                        key={timeString}
+                        className={`schedule-block ${getBlockStyle(status)}`}
+                        onClick={() => toggleSlotStatus(timeString)}
+                      >
+                        {getBlockText(block)}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              {!showAfternoon && (
+                <button 
+                  className="show-afternoon-btn"
+                  onClick={() => setShowAfternoon(true)}
+                >
+                  Show afternoon slots (1:00 PM - 5:00 PM) ↓
+                </button>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Legend Panel */}
+        <div className="legend-panel">
+          <h3>Schedule Legend</h3>
+          
+          <div className="status-legend">
+            <div className="status-item">
+              <div className="status-dot status-open"></div>
+              <div>
+                <span>Open Available</span>
+                <p>Ready for booking</p>
+              </div>
+            </div>
+            
+            <div className="status-item">
+              <div className="status-dot status-closed"></div>
+              <div>
+                <span>Closed Available</span>
+                <p>Teacher unavailable</p>
+              </div>
+            </div>
+            
+            <div className="status-item">
+              <div className="status-dot status-booked"></div>
+              <div>
+                <span>Booked</span>
+                <p>Lesson scheduled</p>
+              </div>
+            </div>
+            
+            <div className="status-item">
+              <div className="status-dot status-tentative"></div>
+              <div>
+                <span>Tentative</span>
+                <p>Pending confirmation</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="quick-actions">
+            <h4>Quick Actions</h4>
+            <button className="action-btn primary">+ Add Lesson</button>
+            <button className="action-btn secondary">✏ Bulk Update</button>
+            <button className="action-btn outline">↓ Export Schedule</button>
+          </div>
+
+          <div className="help-text">
+            <p><strong>*Additional toolbar above or tool tip to prompt user</strong></p>
+            <p>Click any time slot to modify availability or add lessons. Use the teacher tabs to switch between different instructor schedules.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MySchedule;
