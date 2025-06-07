@@ -58,12 +58,13 @@ CREATE TABLE IF NOT EXISTS teacher_instruments (
 -- 📅 LESSONS TABLE
 CREATE TABLE IF NOT EXISTS lessons (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  teacher_id INT,
+  teacher_id INT NOT NULL,
   student_id INT,
-  store_id INT,
+  store_id INT NOT NULL,
   instrument_id INT,
   date DATE,
-  start_time TIME,
+  -- start_time TIME,
+  start_time DATETIME NOT NULL, 
   end_time TIME,
   status VARCHAR(50), 
   FOREIGN KEY (teacher_id) REFERENCES teachers(id),

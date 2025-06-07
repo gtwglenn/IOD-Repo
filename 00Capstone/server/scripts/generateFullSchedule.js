@@ -1,8 +1,8 @@
 const db = require("../db").promise();
 const { format } = require("date-fns");
 
-const START_DATE = new Date("2025-05-30");
-const END_DATE = new Date("2025-06-07");
+const START_DATE = new Date("2025-06-01");
+const END_DATE = new Date("2025-06-30");
 const START_HOUR = 9;
 const END_HOUR = 17;
 const SLOT_DURATION_MINUTES = 30;

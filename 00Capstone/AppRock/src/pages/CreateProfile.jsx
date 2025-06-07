@@ -10,6 +10,7 @@ import {
   Select,
   MenuItem,
   Button,
+  TextField,
 } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 
@@ -20,6 +21,8 @@ export default function CreateProfile() {
   const [role, setRole] = useState("");
   const [instrument, setInstrument] = useState("");
   const [storeLocation, setStoreLocation] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -33,7 +36,7 @@ export default function CreateProfile() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ instrument, role, storeLocation }),
+        body: JSON.stringify({ instrument, role, storeLocation, firstName, lastName }),
       });
 
       const data = await res.json();
@@ -44,7 +47,6 @@ export default function CreateProfile() {
 
       console.log("✅ Profile updated:", data);
 
-      // Optional: if backend returns a new token after profile update
       if (data.token) {
         localStorage.setItem("token", data.token);
         console.log("Updated token saved to localStorage");
@@ -52,13 +54,11 @@ export default function CreateProfile() {
 
       try {
         await fetchUser();
-        console.log(" User context successfully refreshed");
+        console.log("User context successfully refreshed");
         navigate("/home");
       } catch (err) {
         console.error("Error refreshing user context:", err);
         setMessage("Profile updated, but we couldn't refresh user data. Try logging in again.");
-        // Optional fallback:
-        // navigate("/home");
       }
     } catch (err) {
       console.error("Profile update error:", err);
@@ -84,6 +84,24 @@ export default function CreateProfile() {
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
+            <TextField
+              required
+              label="First Name"
+              fullWidth
+              margin="normal"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+
+            <TextField
+              required
+              label="Last Name"
+              fullWidth
+              margin="normal"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+
             <FormControl fullWidth required margin="normal">
               <InputLabel>Select Role</InputLabel>
               <Select

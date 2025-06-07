@@ -1,9 +1,9 @@
+
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); // adjust this path as needed
+const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-//const bcryptjs = require("bcryptjs");
 
 // Middleware to verify JWT token
 function authenticateToken(req, res, next) {
@@ -14,7 +14,7 @@ function authenticateToken(req, res, next) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
-    req.user = user; // Contains user data like id or email
+    req.user = user;
     next();
   });
 }
@@ -27,8 +27,7 @@ router.post("/create-account", async (req, res) => {
     return res.status(400).json({ message: "All fields are required." });
   }
 
-  const checkSql = `SELECT * FROM users WHERE email = ?`;
-
+  const checkSql = "SELECT * FROM users WHERE email = ?";
   db.query(checkSql, [email], async (err, results) => {
     if (err) {
       console.error("Email check error:", err);
@@ -40,29 +39,17 @@ router.post("/create-account", async (req, res) => {
     }
 
     try {
-
       const hashedPassword = await bcrypt.hash(password, 10);
-
-            // USERNAME CREATED: firstName + lastName 
       const username = `${firstName} ${lastName}`.trim();
 
-      // Only inserting the fields we currently have — storeLocation is not part of account creation
-      const insertSql = `
-        INSERT INTO users (firstName, lastName, email, password, username)
-        VALUES (?, ?, ?, ?, ?)
-      `;
-
+      const insertSql = "INSERT INTO users (firstName, lastName, email, password, username) VALUES (?, ?, ?, ?, ?)";
       db.query(insertSql, [firstName, lastName, email, hashedPassword, username], (err, result) => {
         if (err) {
           console.error("Account creation error:", err);
           return res.status(500).json({ message: "Failed to create account." });
         }
 
-        const user = {
-          id: result.insertId,
-          email,
-        };
-
+        const user = { id: result.insertId, email };
         const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         res.status(201).json({ user, token });
@@ -74,30 +61,69 @@ router.post("/create-account", async (req, res) => {
   });
 });
 
-
 // POST /api/update-profile
+// router.post("/update-profile", authenticateToken, (req, res) => {
+//   const { instrument, role, storeLocation } = req.body;
+//   const userId = req.user.id;
+
+//   if (!instrument || !role) {
+//     return res.status(400).json({ message: "Instrument and role are required." });
+//   }
+
+//   let sql = "UPDATE users SET instrument = ?, role = ?";
+//   const params = [instrument, role];
+
+//   if (role === "Teacher" || role === "Employee") {
+//     if (!storeLocation) {
+//       return res.status(400).json({ message: "Store location is required for this role." });
+//     }
+//     sql += ", storeLocation = ?";
+//     params.push(storeLocation);
+//   }
+
+//   sql += " WHERE id = ?";
+//   params.push(userId);
+
+//   db.query(sql, params, (err, results) => {
+//     if (err) {
+//       console.error("Error updating profile:", err);
+//       return res.status(500).json({ message: "Failed to update profile." });
+//     }
+
+//     db.query("SELECT * FROM users WHERE id = ?", [userId], (err2, results) => {
+//       if (err2) {
+//         console.error("Fetch updated user failed:", err2);
+//         return res.status(500).json({ message: "Failed to retrieve updated user." });
+//       }
+
+//       res.status(200).json({
+//         message: "Profile updated successfully.",
+//         updatedUser: results[0]
+//       });
+//     });
+//   });
+// });
+
 router.post("/update-profile", authenticateToken, (req, res) => {
-  const { instrument, role, storeLocation } = req.body;
+  const { instrument, role, storeLocation, firstName, lastName } = req.body;
   const userId = req.user.id;
 
-  if (!instrument || !role) {
-    return res.status(400).json({ message: "Instrument and role are required." });
+  if (!instrument || !role || !firstName || !lastName) {
+    return res.status(400).json({ message: "Instrument, role, first name, and last name are required." });
   }
 
-  // Base SQL and params
-  let sql = `UPDATE users SET instrument = ?, role = ?`;
-  const params = [instrument, role];
+  let sql = "UPDATE users SET instrument = ?, role = ?, firstName = ?, lastName = ?";
+  const params = [instrument, role, firstName, lastName];
 
-  // Only include storeLocation if role requires it
   if (role === "Teacher" || role === "Employee") {
     if (!storeLocation) {
       return res.status(400).json({ message: "Store location is required for this role." });
     }
-    sql += `, storeLocation = ?`;
+    sql += ", storeLocation = ?";
     params.push(storeLocation);
   }
 
-  sql += ` WHERE id = ?`;
+  sql += " WHERE id = ?";
   params.push(userId);
 
   db.query(sql, params, (err, results) => {
@@ -106,184 +132,39 @@ router.post("/update-profile", authenticateToken, (req, res) => {
       return res.status(500).json({ message: "Failed to update profile." });
     }
 
-    res.status(200).json({ message: "Profile updated successfully." });
+    db.query("SELECT * FROM users WHERE id = ?", [userId], (err2, results2) => {
+      if (err2) {
+        console.error("Fetch updated user failed:", err2);
+        return res.status(500).json({ message: "Failed to retrieve updated user." });
+      }
+
+      res.status(200).json({
+        message: "Profile updated successfully.",
+        updatedUser: results2[0]
+      });
+    });
   });
 });
 
 
-// help me computer gods, you are my only hope 
-
+// GET /api/user-data
 router.get("/user-data", authenticateToken, (req, res) => {
-  //const user = req.user.id; 
   const userId = req.user.id;
+  console.log("🔍 Looking up user ID from token:", userId);
 
-  //db.query("SELECT id, first_name, last_name, email, role, instrument, store_location FROM users WHERE id = ?", [userId], (err, results)
-  db.query("SELECT id, firstName, lastName, email, role, instrument, store_location FROM users WHERE id = ?", [userId], (err, results) => {
-    if (err || results.length === 0) {
-      return res.status(500).json({ message: "User not found" });
+  db.query("SELECT * FROM users WHERE id = ?", [userId], (err, results) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).json({ message: "Database error" });
+    }
+
+    if (results.length === 0) {
+      console.warn("❌ No user found for ID:", userId);
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.json(results[0]);
   });
 });
 
-
 module.exports = router;
-
-
-
-
-//           DELETE THIS LATER 
-
-
-
-// GET /api/user-data
-// router.get("/user-data", authenticateToken, (req, res) => {
-//   const userId = req.user.id;
-
-//   const sql = "SELECT * FROM users WHERE id = ?";
-//   db.query(sql, [userId], (err, results) => {
-//     if (err) {
-//       console.error("Database error:", err);
-//       return res.status(500).json({ message: "Internal server error" });
-//     }
-
-//     if (results.length === 0) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res.json(results[0]); // send user data
-//   });
-// });
-
-
-
-//      WORKING AS OF TUESDAY 
-
-// router.post("/create-account", async (req, res) => {
-//   const { firstName, lastName, email, password, storeLocation } = req.body;
-
-//   if (!firstName || !lastName || !email || !password) {
-//     return res.status(400).json({ message: "All fields are required." });
-//   }
-
-//   // Check if user already exists
-//   const checkSql = `SELECT * FROM users WHERE email = ?`;
-//   db.query(checkSql, [email], async (err, results) => {
-//     if (err) {
-//       console.error("Email check error:", err);
-//       return res.status(500).json({ message: "Database error." });
-//     }
-
-//     if (results.length > 0) {
-//       return res.status(409).json({ message: "User with this email already exists." });
-//     }
-
-//     try {
-//       const hashedPassword = await bcrypt.hash(password, 10);
-//       const username = `${firstName} ${lastName}`.trim(); // 👈 required by schema
-
-//       const insertSql = `
-//         INSERT INTO users (first_name, last_name, email, password, username)
-//         VALUES (?, ?, ?, ?, ?)
-//       `;
-
-//       db.query(insertSql, [firstName, lastName, email, hashedPassword, username], (err, result) => {
-//         if (err) {
-//           console.error("Account creation error:", err);
-//           return res.status(500).json({ message: "Failed to create account." });
-//         }
-
-//         const user = {
-//           id: result.insertId,
-//           email,
-//         };
-
-//         const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-//         res.status(201).json({ user, token });
-//       });
-//     } catch (err) {
-//       console.error("Password hashing error:", err);
-//       res.status(500).json({ message: "Server error during account creation." });
-//     }
-//   });
-// });
-
-
-// router.post("/update-profile", authenticateToken, (req, res) => {
-//   const { instrument, role } = req.body;
-//   const userId = req.user.id;
-
-//   if (!instrument || !role) {
-//     return res.status(400).json({ message: "Instrument and role are required." });
-//   }
-
-//   const sql = `UPDATE users SET instrument = ?, role = ? WHERE id = ?`;
-
-//   db.query(sql, [instrument, role, userId], (err, results) => {
-//     if (err) {
-//       console.error("Database update error:", err);
-//       return res.status(500).json({ message: "Failed to update profile." });
-//     }
-
-//     res.json({ message: "Profile updated successfully." });
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// router.post("/create-account", (req, res) => {
-//   const { firstName, lastName, email } = req.body;
-
-//   const sql = `INSERT INTO users (firstName, lastName, email) VALUES (?, ?, ?)`;
-
-//   db.query(sql, [firstName, lastName, email], (err, result) => {
-//     if (err) {
-//       console.error("Account creation error:", err);
-//       return res.status(500).json({ message: "Failed to create account." });
-//     }
-
-//     const userId = result.insertId;
-//     const user = { id: userId, email };
-
-//     // ✅ Sign JWT token with user id and email
-//     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
-
-//     res.json({ user, token });
-//   });
-// });

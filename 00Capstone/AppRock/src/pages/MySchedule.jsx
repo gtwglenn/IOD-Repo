@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import Calendar from "../components/Calendar";
 import ScheduleView from "../components/ScheduleView";
+import ScheduleLesson from "../components/ScheduleLesson";
+import { AuthContext } from "../context/AuthContext"; 
+import CancelLesson from "../components/CancelLesson";
 
 export default function MySchedule() {
+  const { user } = useContext(AuthContext); 
   const [searchParams] = useSearchParams();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -11,6 +15,8 @@ export default function MySchedule() {
 
   const [committedDate, setCommittedDate] = useState(null);
   const [committedStoreId, setCommittedStoreId] = useState(null);
+
+  const [refreshKey, setRefreshKey] = useState(0); 
 
   useEffect(() => {
     const storeFromURL = searchParams.get("store");
@@ -48,7 +54,7 @@ export default function MySchedule() {
     }
   };
 
-  return (
+    return (
     <div style={{ padding: "2rem" }}>
       <h2>|Logo| Lesson Scheduler</h2>
 
@@ -71,15 +77,32 @@ export default function MySchedule() {
         <button onClick={handleSubmit}>Submit</button>
       </div>
 
-      {/* View uses committed selections only */}
+      {/* Show lesson-related views after submit */}
       {committedStoreId && committedDate && (
-        <ScheduleView
-          selectedDate={committedDate}
-          selectedStoreId={committedStoreId}
-        />
+        <>
+          <ScheduleLesson
+            selectedStoreId={committedStoreId}
+            selectedDate={committedDate}
+            studentId={user?.id}
+            onLessonScheduled={() => setRefreshKey(prev => prev + 1)}
+          />
+
+          <ScheduleView
+            selectedDate={committedDate}
+            selectedStoreId={committedStoreId}
+            refreshKey={refreshKey}
+          />
+
+          <CancelLesson
+            userId={user?.id}
+            refreshKey={refreshKey}
+            onCancel={() => setRefreshKey(prev => prev + 1)}
+          />
+        </>
       )}
     </div>
   );
+
 }
 
 

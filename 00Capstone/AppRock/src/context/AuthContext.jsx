@@ -1,21 +1,12 @@
 
-
-
-// ----------- DO NOT LISTEN TO THE COFFEE: DO NOT TOUCH THIS -----------------------
-// ----------- I KNOW WHAT YOU'RE THINKING BUT THIS WORKS ----------------------------
-// ----------- DON'T DO IT -----------------------------------------------------------
-
-
-
-
 import { createContext, useState, useEffect, useContext } from "react";
 
-// 🧼 Normalize backend user shape into frontend format
+// ✅ Convert backend field names to frontend camelCase
 function normalizeUser(userFromBackend) {
   return {
     id: userFromBackend.id,
-    firstName: userFromBackend.first_name,
-    lastName: userFromBackend.last_name,
+    firstName: userFromBackend.firstName,
+    lastName: userFromBackend.lastName,
     email: userFromBackend.email,
     storeLocation: userFromBackend.store_location,
     role: userFromBackend.role,
@@ -31,7 +22,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Hoist fetchUser above useEffect so it's defined when called
   const fetchUser = async (authToken) => {
     const resolvedToken = authToken || token;
     if (!resolvedToken) {
@@ -49,39 +39,42 @@ export const AuthProvider = ({ children }) => {
         },
       });
 
-      if (!res.ok) throw new Error("Failed to fetch user");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Fetch failed: ${res.status} - ${text}`);
+      }
 
       const data = await res.json();
       const normalized = normalizeUser(data);
       setUser(normalized);
       localStorage.setItem("user", JSON.stringify(normalized));
     } catch (err) {
-      console.error("User fetch error:", err);
+      console.error("❌ User fetch error:", err);
       setError(err.message || "Unknown error");
-      // setUser(null);
-      // localStorage.removeItem("token");                                    // removed --> preventing auto-login after account creation 
+      setUser(null);
     } finally {
       setLoading(false);
     }
   };
 
-  // On first load, restore token and user from localStorage
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.warn("Corrupt user in localStorage", err);
+        localStorage.removeItem("user");
+      }
+    }
 
     if (storedToken) {
       setToken(storedToken);
-      fetchUser(storedToken); //Now safe to call
+      fetchUser(storedToken);
     } else {
       setLoading(false);
-    }
-
-    try {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser) setUser(storedUser);
-    } catch (err) {
-      console.warn("Corrupt user in localStorage", err);
-      localStorage.removeItem("user");
     }
   }, []);
 
@@ -118,5 +111,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// 🪄 Optional custom hook so you don't have to manually useContext(AuthContext)
 export const useAuth = () => useContext(AuthContext);
